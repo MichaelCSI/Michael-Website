@@ -7,7 +7,7 @@ import { useGLTF, useTexture } from "@react-three/drei";
 
 export default function Model(props) {
   const { nodes, materials } = useGLTF("./phone.gltf");
-  const screenTexture = useTexture('./SkinApp.jpeg');
+  const screenTexture = useTexture('./hackathonApp.jpeg');
   screenTexture.rotation = Math.PI / 2;
   screenTexture.offset.set(0, 1.5);
   screenTexture.repeat.set(3, 2);
