@@ -1,12 +1,12 @@
 export default [
     {
-        model: 'https://threejs-practice-pi.vercel.app/',
+        model: 'https://vazxmixjsiawhamofees.supabase.co/storage/v1/object/public/models/macbook/model.gltf',
         position: [0, -1.5, 0],
         rotation: [0, -0.1, 0],
         image: {
             scale: [3, 2, 1],
             position: [ 0, 1.56, - 1.4 ],
-            rotationX: - 0.256,
+            rotation: [-0.256, 0, 0],
             url :  './galaxy.png'
         },
         linkText: {
@@ -19,7 +19,7 @@ export default [
     },
     {
         model: 'https://vazxmixjsiawhamofees.supabase.co/storage/v1/object/public/models/iphone-x/model.gltf',
-        position: [1, -1, 0],
+        position: [6, -1, 0],
         rotation: [-0.4, -0.3, 0],
         scale: [0.8, 0.8, 0.8],
         image: {
@@ -38,14 +38,8 @@ export default [
     },
     {
         model: 'https://vazxmixjsiawhamofees.supabase.co/storage/v1/object/public/models/umbrella/model.gltf',
-        position: [2, -0.5, 0],
+        position: [12, -0.5, 0],
         rotation: [0, Math.PI * 1.2, 0],
-        image: {
-            scale: [3, 2, 1],
-            position: [ 0, 1.56, - 1.4 ],
-            rotationX: - 0.256,
-            url :  './galaxy.png'
-        },
         linkText: {
             media: 'https://www.youtube.com/channel/UCo9DGaDW1IbWbTjPcEJQELg',
             text: "Unity/Blender",
@@ -54,5 +48,11 @@ export default [
             textSecondary: '#3c5b95',
             position: [2.2, 1.2, 0.75]
         }
+    },
+    {
+        model: 'https://vazxmixjsiawhamofees.supabase.co/storage/v1/object/public/models/ruby/model.gltf',
+        position: [12 + 0.8, 0, 0],
+        rotation: [0, Math.PI * 1.2, 0],
+        scale: [0.3, 0.3, 0.3]
     }
 ]
