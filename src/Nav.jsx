@@ -9,15 +9,16 @@ export default function Nav(){
 
     return <>
         <Float rotationIntensity={ 0.2 }>
+            <color args={ [ '#241a1a' ] } attach="background" />
             {nav.map((text, index) => (
                 <LinkText
                     key={ text }
                     linkText={text}
                     media={ text.localeCompare("home") === 0 ? "/" : "/"+text }
-                    fontSize={ 0.15 }
+                    fontSize={ 0.4 }
                     textPrimary='#2cb43e'
                     textSecondary='#359943'
-                    position={ [-2.8 + index * 0.55, 2.65, 0] }
+                    position={ [-8.2 + index * 1.5, 5.5, 0] }
                     rotation={ [0, 0, 0] }
                 />
             ))}

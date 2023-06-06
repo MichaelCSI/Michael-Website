@@ -43,7 +43,7 @@ export default function LinkText(props)
 
 LinkText.defaultProps = {
     position: [2, 2.2, 0.75],
-    rotation: [0, -1.2, 0],
+    rotation: [0, 0, 0],
     linkText: 'Link',
     newTab: false
 }

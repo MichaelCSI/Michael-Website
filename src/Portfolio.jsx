@@ -1,34 +1,21 @@
 import Model from './Model.jsx'
-import Phone from './Phone.jsx'
 import LinkText from './LinkText.jsx'
-import Nav from './Nav.jsx'
 import MODELS from './modelList.js'
 
 import { Perf } from 'r3f-perf'
-import { useRef } from 'react'
-import { useFrame } from '@react-three/fiber'
 import { 
     Environment,
     OrbitControls,
     ScrollControls,
     Scroll,
-    useScroll,
     ContactShadows,
     Image,
-    Float
+    Float,
+    PivotControls
 } from '@react-three/drei'
 
 export default function Portfolio()
 {
-    const scroll = useScroll()
-    console.log(scroll)
-
-    const refs = useRef(new Array())
-    
-    useFrame((state, delta) => {
-        const time = state.clock.elapsedTime
-        refs.current[0].position.x = Math.sin(time)
-    })
 
     return <>
         {/* <Perf position="top-left" /> */}
@@ -39,27 +26,26 @@ export default function Portfolio()
             height={ 1.65 }
             intensity={ 60 }
             color={ '#ff6900' }
-            rotation={ [ - 0.1, Math.PI, 0 ] }
-            position={ [ 0, 0.55, - 1.15 ] }
+            rotation={ [ -1, 0, 0 ] }
+            position={ [ 0, 4, 6 ] }
         />
         <ContactShadows
-            position-y={ - 1.8 }
+            position-y={ - 1 }
             opacity={ 0.4 }
             scale={ 30 }
             blur={ 2.4 }
             // frames= { 1 }
         />
-        <Nav/>
-
-        <ScrollControls pages={ 3 } horizontal={ true }>
+        <ScrollControls infinite={ true } pages={ 4 } horizontal={ true }>
             <Float rotationIntensity={ 0.3 }> 
-                <Scroll> 
                     {MODELS.map((model, index) => (
                         <Model 
+                            numModels={ MODELS.length }
+                            modelIndex={ index }
                             modelRef={ (element) => refs.current.push(element) }
                             key={ model.model }
                             model={ model.model }
-                            position={ model.position } 
+                            position={ model.position }
                             rotation={ model.rotation }
                             scale={ model.scale }
                             image={ model.image ? 
@@ -83,8 +69,6 @@ export default function Portfolio()
                             }
                         />
                     ))}
-                    {/* <Phone position={ [3 * positionXGap, -1.2, 0] }/> */}
-                </Scroll>
             </Float>
         </ScrollControls>
     </>

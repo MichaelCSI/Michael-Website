@@ -1,8 +1,7 @@
 export default [
     {
-        model: 'https://vazxmixjsiawhamofees.supabase.co/storage/v1/object/public/models/macbook/model.gltf',
-        position: [0, -1.5, 0],
-        rotation: [0, -0.1, 0],
+        model: './laptop.gltf',
+        position: [0, -0.3, 0],
         image: {
             scale: [3, 2, 1],
             position: [ 0, 1.56, - 1.4 ],
@@ -18,9 +17,8 @@ export default [
         }
     },
     {
-        model: 'https://vazxmixjsiawhamofees.supabase.co/storage/v1/object/public/models/iphone-x/model.gltf',
-        position: [6, -1, 0],
-        rotation: [-0.4, -0.3, 0],
+        model: 'phone.gltf',
+        rotation: [-0.4, 0, 0],
         scale: [0.8, 0.8, 0.8],
         image: {
             scale: [1.51, 2.95, 1],
@@ -33,26 +31,21 @@ export default [
             fontSize: 0.4,
             textPrimary: '#fe7f9c',
             textSecondary: '#f14d73',
-            position: [2.2, 1.5, 0.75]
+            position: [2.2, 1.5, 0]
         }
     },
     {
-        model: 'https://vazxmixjsiawhamofees.supabase.co/storage/v1/object/public/models/umbrella/model.gltf',
-        position: [12, -0.5, 0],
+        model: 'umbrella.gltf',
+        position: [0, 0.5, 0],
         rotation: [0, Math.PI * 1.2, 0],
+        scale: [1.3, 1.3, 1.3],
         linkText: {
             media: 'https://www.youtube.com/channel/UCo9DGaDW1IbWbTjPcEJQELg',
             text: "Unity/Blender",
             fontSize: 0.4,
             textPrimary: '#4e6cb7',
             textSecondary: '#3c5b95',
-            position: [2.2, 1.2, 0.75]
+            position: [2.3, 1.2, 0.1]
         }
-    },
-    {
-        model: 'https://vazxmixjsiawhamofees.supabase.co/storage/v1/object/public/models/ruby/model.gltf',
-        position: [12 + 0.8, 0, 0],
-        rotation: [0, Math.PI * 1.2, 0],
-        scale: [0.3, 0.3, 0.3]
     }
 ]
