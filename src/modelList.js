@@ -13,7 +13,7 @@ export default [
             text: "Three Galaxy",
             fontSize:  0.4,
             textPrimary: '#ff6030',
-            textSecondary: '#de4222',
+            textSecondary: '#d0312d',
             position: [2.5, 2.2, 0],
         }
     },
@@ -44,8 +44,8 @@ export default [
             media: 'https://www.youtube.com/channel/UCo9DGaDW1IbWbTjPcEJQELg',
             text: "Unity/Blender",
             fontSize: 0.4,
-            textPrimary: '#4e6cb7',
-            textSecondary: '#3c5b95',
+            textPrimary: '#4e97d1',
+            textSecondary: '#00569d',
             position: [2.3, 1.2, 0.1]
         }
     }

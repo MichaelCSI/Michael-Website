@@ -1,13 +1,15 @@
 import LinkText from './LinkText.jsx'
 import { Float } from '@react-three/drei'
+import { Perf } from 'r3f-perf'
+
 
 export default function Nav(){
 
     const nav = ['home', 'portfolio', 'games']
 
     return <>
-        <Float rotationIntensity={ 0.2 }>
-            <color args={ [ '#241a1a' ] } attach="background" />
+        <Perf/>
+        <Float rotationIntensity={ 0.1 } speed={ 2 } floatIntensity={ 0.1 } >
             {nav.map((text, index) => (
                 <LinkText
                     key={ text }
@@ -15,7 +17,7 @@ export default function Nav(){
                     media={ text.localeCompare("home") === 0 ? "/" : "/"+text }
                     fontSize={ 0.4 }
                     textPrimary='ivory'
-                    textSecondary='#359943'
+                    textSecondary='#61dbfb'
                     position={ [-8.2 + index * 1.5, 5.5, 0] }
                     rotation={ [0, 0, 0] }
                 />

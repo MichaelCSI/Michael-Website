@@ -15,7 +15,7 @@ export default function Portfolio()
 {
     return <>
         {/* <OrbitControls></OrbitControls> */}
-        <color args={ [ 'ivory' ] } attach="background" />
+        <color args={ [ '#241a1a' ] } attach="background" />
 
         <Environment preset="city" />
         <rectAreaLight
@@ -34,7 +34,7 @@ export default function Portfolio()
             // frames= { 1 }
         />
         <ScrollControls infinite={ true } pages={ 4 } horizontal={ true }>
-            <Float rotationIntensity={ 0.3 }> 
+            <Float rotationIntensity={ 0.2 } speed={ 2 } floatIntensity={ 0.5 }> 
                     {MODELS.map((model, index) => (
                         <Model 
                             numModels={ MODELS.length }
