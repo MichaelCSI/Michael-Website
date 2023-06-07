@@ -12,7 +12,7 @@ export default function Model(props)
     const scroll = useScroll()
     const modelOffset = Math.PI * 2 / props.numModels
     
-    useFrame((state, delta) => {
+    useFrame((state) => {
         const time = state.clock.elapsedTime
         const offset = - scroll.offset * Math.PI * 2
         const radius = 4
@@ -30,15 +30,6 @@ export default function Model(props)
         <group position={ props.position } ref={ modelRef }>
             <primitive object={ model.scene } rotation={ props.rotation } scale={ props.scale }>
                 {props.image}
-                {/* <Html
-                        transform
-                        wrapperClass={ props.mediaStyle }
-                        distanceFactor={ 1.17 }
-                        position={ [ 0, 1.56, - 1.4 ] }
-                        rotation-x={ - 0.256 }
-                    >
-                    <iframe src={props.media}></iframe>
-                </Html> */}
             </primitive>
             {props.text}
         </group>

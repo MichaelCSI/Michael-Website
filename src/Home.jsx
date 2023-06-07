@@ -1,15 +1,21 @@
-import LinkText from './LinkText.jsx'
+import ReactAtom from './ReactAtom.jsx'
+import { useControls } from 'leva'
 
-export default function Home(){
-
+export default function Home()
+{
     return <>
-        <LinkText
-            linkText={"Home"}
-            fontSize={ 0.5 }
-            textPrimary='#2cb43e'
-            textSecondary='#359943'
-            position={ [0.55, 2.65, 0] }
-            rotation={ [0, 0, 0] }
-        />
+        <color args={ [ '#000000' ] } attach="background" />
+        {[...Array(3).keys()].map((_, index) => (
+            <ReactAtom
+                position={ [0, -2, 0] }
+                atomScale={ [0.5, 0.5, 0.5] }
+                key={ index }
+                index={ index }
+                numTrails={ 3 }
+                trailColor='#61dbfb'
+                amplitude={ 0.5 }
+                frequency={ 10 }
+            />
+        ))}
     </>
 }

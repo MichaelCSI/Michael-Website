@@ -1,29 +1,30 @@
 export default [
     {
-        model: './laptop.gltf',
+        model: './models/laptop.gltf',
         position: [0, -0.3, 0],
         image: {
             scale: [3, 2, 1],
             position: [ 0, 1.56, - 1.4 ],
             rotation: [-0.256, 0, 0],
-            url :  './galaxy.png'
+            url :  './images/galaxy.png'
         },
         linkText: {
             media: 'https://threejs-practice-pi.vercel.app/',
             text: "Three Galaxy",
             fontSize:  0.4,
             textPrimary: '#ff6030',
-            textSecondary: '#de4222'
+            textSecondary: '#de4222',
+            position: [2.5, 2.2, 0],
         }
     },
     {
-        model: 'phone.gltf',
+        model: './models/phone.gltf',
         rotation: [-0.4, 0, 0],
         scale: [0.8, 0.8, 0.8],
         image: {
             scale: [1.51, 2.95, 1],
             position: [ 0.17, 1.35, 0.09 ],
-            url: './hackathonApp.jpeg'
+            url: './images/hackathonApp.jpeg'
         },
         linkText: {
             media: 'https://devpost.com/software/skin-cancer-detection-app-fm7ptq',
@@ -35,7 +36,7 @@ export default [
         }
     },
     {
-        model: 'umbrella.gltf',
+        model: './models/umbrella.gltf',
         position: [0, 0.5, 0],
         rotation: [0, Math.PI * 1.2, 0],
         scale: [1.3, 1.3, 1.3],

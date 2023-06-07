@@ -2,24 +2,21 @@ import Model from './Model.jsx'
 import LinkText from './LinkText.jsx'
 import MODELS from './modelList.js'
 
-import { Perf } from 'r3f-perf'
 import { 
     Environment,
     OrbitControls,
     ScrollControls,
-    Scroll,
     ContactShadows,
     Image,
-    Float,
-    PivotControls
+    Float
 } from '@react-three/drei'
 
 export default function Portfolio()
 {
-
     return <>
-        {/* <Perf position="top-left" /> */}
         {/* <OrbitControls></OrbitControls> */}
+        <color args={ [ 'ivory' ] } attach="background" />
+
         <Environment preset="city" />
         <rectAreaLight
             width={ 2.5 }
@@ -31,7 +28,7 @@ export default function Portfolio()
         />
         <ContactShadows
             position-y={ - 1 }
-            opacity={ 0.4 }
+            opacity={ 0.5 }
             scale={ 30 }
             blur={ 2.4 }
             // frames= { 1 }
@@ -42,7 +39,6 @@ export default function Portfolio()
                         <Model 
                             numModels={ MODELS.length }
                             modelIndex={ index }
-                            modelRef={ (element) => refs.current.push(element) }
                             key={ model.model }
                             model={ model.model }
                             position={ model.position }

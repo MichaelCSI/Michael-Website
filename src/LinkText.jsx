@@ -9,7 +9,7 @@ export default function LinkText(props)
     return <>
         <group rotation={ props.rotation } position={ props.position }>
             <Text
-                font="./bangers-v20-latin-regular.woff"
+                font="./fonts/bangers-v20-latin-regular.woff"
                 fontSize={ props.fontSize }
                 maxWidth={ 2 }
                 color={ props.textPrimary }
@@ -17,7 +17,7 @@ export default function LinkText(props)
                 {props.text}
             </Text>
             <Text
-                font="./bangers-v20-latin-regular.woff"
+                font="./fonts/bangers-v20-latin-regular.woff"
                 fontSize={ props.fontSize }
                 position-y={ -1 }
                 color={ buttonHover ? props.textSecondary : props.textPrimary}
