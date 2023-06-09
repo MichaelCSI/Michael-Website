@@ -1,27 +1,32 @@
-import Model from './Model.jsx'
 import LinkText from './LinkText.jsx'
 import MODELS from './modelList.js'
-
+import * as THREE from 'three'
 import { 
     Environment,
-    OrbitControls,
+    useGLTF,
+    useScroll,
     ScrollControls,
     ContactShadows,
     Image,
-    Float
+    Float,
+    Sky,
+    OrbitControls
 } from '@react-three/drei'
 
+import { useRef } from 'react'
+import { useFrame, applyProps } from '@react-three/fiber'
+
+// 3D models are from https://market.pmnd.rs/
 export default function Portfolio()
 {
     return <>
-        {/* <OrbitControls></OrbitControls> */}
-        <color args={ [ '#241a1a' ] } attach="background" />
-
+    {/* <OrbitControls/> */}
         <Environment preset="city" />
+        <Sky azimuth={ 0.75 } rayleigh={ 0.2 }/>
         <rectAreaLight
             width={ 2.5 }
             height={ 1.65 }
-            intensity={ 60 }
+            intensity={ 30 }
             color={ '#ff6900' }
             rotation={ [ -1, 0, 0 ] }
             position={ [ 0, 4, 6 ] }
@@ -67,5 +72,42 @@ export default function Portfolio()
                     ))}
             </Float>
         </ScrollControls>
+    </>
+}
+
+function Model(props)
+{
+    const model = useGLTF(props.model)
+    const modelRef = useRef()
+    const scroll = useScroll()
+    const modelOffset = Math.PI * 2 / props.numModels
+
+    // Adjust phone screen to white
+    if(model.nodes.SCREEN) {
+        console.log(model.nodes.SCREEN.material)
+        applyProps(model.nodes.SCREEN, { material: new THREE.MeshBasicMaterial({ color: '#ffffff'})})
+    }
+    
+    useFrame((state) => {
+        const time = state.clock.elapsedTime
+        const offset = - scroll.offset * Math.PI * 2
+        const radius = 4
+
+        modelRef.current.position.x = Math.sin(offset + props.modelIndex * modelOffset) * radius - 1
+        modelRef.current.position.z = Math.cos(offset + props.modelIndex * modelOffset) * radius
+        
+        // "Normalize" Z to [0, 1.5], scale model based on Z
+        const range = modelRef.current.position.z / radius
+        const zPosNormalized = (range + 1.1) / 1.5
+        modelRef.current.scale.set(zPosNormalized, zPosNormalized, zPosNormalized)
+    })
+
+    return <>    
+        <group position={ props.position } ref={ modelRef }>
+            <primitive object={ model.scene } rotation={ props.rotation } scale={ props.scale }>
+                {props.image}
+            </primitive>
+            {props.text}
+        </group>
     </>
 }

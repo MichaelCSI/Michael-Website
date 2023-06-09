@@ -17,7 +17,7 @@ export default function ReactAtom(props)
         const y = props.index === 0 ? 0 : Math.sin(props.frequency * time) * props.amplitude
         const z = Math.cos(props.frequency * time) * props.amplitude
     
-        trailRef.current.position.set(x, y, z);
+        trailRef.current.position.set(x, y, z)
 
         // Done to fix the trail starting/rendering at center screen briefly
         if(time > 0.1) {
@@ -29,7 +29,7 @@ export default function ReactAtom(props)
     return <>
         <mesh scale={ props.atomScale}>
             <sphereGeometry args={[0.12, 16, 16]} />
-            <meshStandardMaterial color="#61dbfb" emissive="#61dbfb" toneMapped={ false } />
+            <meshBasicMaterial color="#61dbfb"/>
         </mesh> 
         <Trail
             width={ 0.05}

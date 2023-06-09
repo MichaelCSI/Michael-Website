@@ -5,6 +5,7 @@ import Nav from './Nav.jsx'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Canvas } from '@react-three/fiber'
 
+
 export default function App(){
 
     return <>
@@ -23,9 +24,7 @@ export default function App(){
                             } }
                         >
                             <Nav/>
-                            <Home
-                                numStars={ 2 }
-                            />
+                            <Home/>
                         </Canvas>
                     }
                 />
@@ -42,6 +41,7 @@ export default function App(){
                             } }
                         >
                             <Nav/>
+                            
                             <Portfolio/>
                         </Canvas>
                     }

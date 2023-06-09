@@ -22,7 +22,7 @@ export default [
         rotation: [-0.4, 0, 0],
         scale: [0.8, 0.8, 0.8],
         image: {
-            scale: [1.51, 2.95, 1],
+            scale: [1.4, 2.95, 1],
             position: [ 0.17, 1.35, 0.09 ],
             url: './images/hackathonApp.jpeg'
         },
