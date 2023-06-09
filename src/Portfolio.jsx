@@ -22,7 +22,7 @@ export default function Portfolio()
     return <>
     {/* <OrbitControls/> */}
         <Environment preset="city" />
-        <Sky azimuth={ 0.75 } rayleigh={ 0.2 }/>
+        <Sky azimuth={ 0.75 } rayleigh={ 0.3 }/>
         <rectAreaLight
             width={ 2.5 }
             height={ 1.65 }

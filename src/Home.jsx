@@ -1,17 +1,28 @@
 import ReactAtom from './ReactAtom.jsx'
-import { Text, useGLTF, Trail, Float } from '@react-three/drei'
+import { 
+    Text, 
+    useGLTF, 
+    Trail, 
+    Float, 
+    OrbitControls,
+    Environment
+} from '@react-three/drei'
 import { useFrame, applyProps } from '@react-three/fiber'
 import * as THREE from 'three'
 import { useRef, useState } from 'react'
+import Setup from './Setup.jsx'
 
 export default function Home()
 {
 
     return <>
-        <color args={['#000000']} attach='background'/>
+        <color args={['#000000']}  attach='background'/>
+        <Environment preset="city" />
+        <OrbitControls/>
         <MadeWithReact/>
         <Contact/>
         <Trails/>
+        <Setup position={ [0, 0, 5] }/>
     </>
 }
 
@@ -74,9 +85,11 @@ function Contact()
             onPointerLeave={ () => { document.body.style.cursor = 'default' }}  
         >
             {contacts.map((contact, index) => (
-                <Float speed={ 3 }>
+                <Float 
+                    speed={ 3 }
+                    key={ contact.link }
+                >
                     <primitive 
-                        key={ contact.link }
                         object={ contact.media }
                         position={ [-1.5 + 1.5 * index, 0.05 * index, 0.05 * index] } 
                         scale={ [0.1, 0.1, 0.1] }
@@ -85,7 +98,6 @@ function Contact()
                 </Float>
                 ))}
         </group>
-        <ambientLight intensity={100}/>
     </>
 }
 
@@ -154,8 +166,9 @@ function Trails()
                 {mesh: oRef, trail: oTrailRef},
                 {mesh: dotRef, trail: dotTrailRef},
                 {mesh: bounceRef, trail: bounceTrailRef}
-            ].map((r) => (
+            ].map((r, index) => (
                     <Trail
+                        key={ 'trail'+index }
                         ref={ r.trail }
                         width={ 0.07}
                         length={ 100 }
@@ -168,3 +181,5 @@ function Trails()
         </group>
     </>
 }
+
+
