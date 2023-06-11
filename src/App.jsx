@@ -20,7 +20,7 @@ export default function App(){
                                 fov: 45,
                                 near: 0.1,
                                 far: 2000,
-                                position: [ 0, 4, 12 ]
+                                position: [ 0, 1, 8 ]
                             } }
                         >
                             <Nav/>

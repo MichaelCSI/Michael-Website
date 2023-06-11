@@ -21,7 +21,7 @@ export default function Portfolio()
 {
     return <>
     {/* <OrbitControls/> */}
-        <Environment preset="city" />
+        <Environment files='./hdrs/evening_road_01_puresky_4k.hdr'/>
         <Sky azimuth={ 0.75 } rayleigh={ 0.3 }/>
         <rectAreaLight
             width={ 2.5 }
@@ -84,7 +84,6 @@ function Model(props)
 
     // Adjust phone screen to white
     if(model.nodes.SCREEN) {
-        console.log(model.nodes.SCREEN.material)
         applyProps(model.nodes.SCREEN, { material: new THREE.MeshBasicMaterial({ color: '#ffffff'})})
     }
     

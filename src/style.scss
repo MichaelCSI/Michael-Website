@@ -4,7 +4,7 @@ $galaxy_3: #ff6030;
 
 $skin_1: #fe7f9c;
 $skin_2: #fa92aa;
-$testing: #2cb73f;
+$testing: #46bddb;
 
 html,
 body,
@@ -45,19 +45,16 @@ canvas
     &:hover { background-color: $skin_2; }
 }
 
-/* .laptopScreen iframe
+.games img
 {
-    width: 1024px;
-    height: 670px;
+    width: 900px;
+    height: 700px;
     border: none;
-    border-radius: 20px;
-    background: #000000;
-} */
-/* .phoneScreen iframe
+    border-radius: 60px;
+}
+.aboutMe iframe
 {
-    width: 800px;
-    height: 2000px;
+    width: 1000px;
+    height: 720px;
     border: none;
-    border-radius: 20px;
-    background: #000000;
-} */
+}
