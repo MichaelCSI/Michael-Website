@@ -6,10 +6,16 @@ import { useRef, useState } from 'react'
 export default function ReactAtom(props)
 {
     const scaleRatio = props.scaleRatio
+    const textRef = useRef()
+    useFrame((state) => {
+        const time = state.clock.elapsedTime
+        textRef.current.fillOpacity = Math.sin(time) + 3
+    })
 
     return <>
         <group position={ props.position }>
             <Text
+                ref={ textRef }
                 font="./fonts/SourceCodePro-BlackItalic.ttf"
                 fontSize={ scaleRatio * 0.3 }
                 outlineWidth={ scaleRatio * 0.02 }
@@ -36,7 +42,7 @@ export default function ReactAtom(props)
 
 function Logo(props)
 {
-    const trailRef = useRef()
+    const meshRef = useRef()
     const [showTrail, setShowTrail] = useState(false)
 
     const trailOffset = props.index * 2 * Math.PI / (props.numTrails - 1)
@@ -48,11 +54,10 @@ function Logo(props)
         const x = Math.sin(props.frequency * time + trailOffset) * amp
         const y = props.index === 0 ? 0 : Math.sin(props.frequency * time) * amp
         const z = Math.cos(props.frequency * time) * amp
-    
-        trailRef.current.position.set(x, y, z)
+        meshRef.current.position.set(x, y, z)
 
         // Done to fix the trail starting/rendering at center screen briefly
-        if(time > 0.15) {
+        if(time > 0.2) {
             setShowTrail(true)
         }
 
@@ -70,7 +75,7 @@ function Logo(props)
             decay={ showTrail ? 8 : 500 }
             attenuation={(width) => width*10}
             >
-            <mesh ref={ trailRef }/>          
+            <mesh ref={ meshRef }/>          
         </Trail>
     </>
 }

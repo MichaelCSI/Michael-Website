@@ -8,7 +8,8 @@ Thanks to Bruno Simon/Three.js journey for teaching many of the concepts used
 
 TODO
 
-No nav -> tv tower with clickable sections like helmet three js
+No nav -> objects on strings over ocean with night - clickable
+Fix lines appearing in ocean
 
 Other
 Scale buttons on hover?

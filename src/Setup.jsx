@@ -1,10 +1,10 @@
 import { 
-    Text, 
     useGLTF,
     Center,
-    Lightformer,
     Html
 } from '@react-three/drei'
+import { applyProps } from '@react-three/fiber'
+import * as THREE from 'three'
 
 
 export default function Setup(props)
@@ -31,10 +31,10 @@ function Items(props)
             <Html
                 transform
                 wrapperClass="aboutMe"
-                distanceFactor={ scaleRatio * 154 }
-                position={ [scaleRatio * 84, scaleRatio * 750, scaleRatio * 320] }
+                distanceFactor={ scaleRatio * 175 }
+                position={ [scaleRatio * 84, scaleRatio * 750, scaleRatio * 340] }
             >
-                <iframe src="https://threejs-practice-pi.vercel.app/" />
+                <iframe src="https://linamoussadek.github.io/MyOwnWebsite/" />
             </Html>
             <Games rotation={ [0, -Math.PI / 4, 0] } position={ [0.6, 0.17, 0.5] }/>
         </group>
@@ -44,6 +44,20 @@ function Items(props)
 function Games(props)
 {
     const scaleRatio = 0.0025
+
+    const computer = useGLTF('./models/computer.glb')
+    const computerParts = [
+        computer.nodes.monitor_1_Material001_0,
+        computer.nodes.monitor_1_Material002_0,
+        computer.nodes.monitor_1_Material004_0,
+        computer.nodes.monitor_1_Material006_0
+    ]
+    const computerMaterial = new THREE.MeshStandardMaterial({ color: '#000000', roughness: 0.3, metalness: 0.7 })
+    const computerMaterial2 = new THREE.MeshBasicMaterial({ color: '#40b9d9' })
+    computerParts.forEach((part) => { applyProps(part, { material: computerMaterial })})
+    applyProps(computer.nodes.keyboard_1_Material001_0, { material: computerMaterial2 })
+
+
     return <>
         <group rotation={ props.rotation } position={ props.position }>
             <Model 

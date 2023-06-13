@@ -29,29 +29,36 @@ import {
     Float, 
     OrbitControls,
     Environment,
-    Text
+    Text,
+    Sky
 } from '@react-three/drei'
 import { useFrame, applyProps } from '@react-three/fiber'
 import * as THREE from 'three'
 import { useRef, useState } from 'react'
 import Setup from './Setup.jsx'
+import { EffectComposer, Bloom } from '@react-three/postprocessing'
 
 export default function Home()
 {
 
+    const meRef = useRef()
+    useFrame((state) => {
+        const time = state.clock.elapsedTime
+        meRef.current.fillOpacity = Math.sin(time) + 3
+    })
+
     return <>
-        <Environment files='./hdrs/evening_road_01_puresky_4k.hdr'/>
-        <color args={['#000000']} attach='background'/>
-        <rectAreaLight
-            width={ 2.5 }
-            height={ 1.65 }
-            intensity={ 50 }
-            color={ '#ff6900' }
-            rotation={ [ -1, 0, 0 ] }
-            position={ [ 0, 10, 10 ] }
-        />
+        <Environment files='./hdrs/evening_road_01_puresky_4k.hdr' background={ true }/>
+        <color args={['#110050']} attach='background'/>
+        <EffectComposer>
+            <Bloom
+                mipmapBlur
+                intensity={ 0.4 }
+            />
+        </EffectComposer>
         <OrbitControls/>
         <Text
+            ref={ meRef }
             font="./fonts/SourceCodePro-BlackItalic.ttf"
             fontSize={ 0.2 }
             outlineWidth={ 0.02 }
@@ -92,9 +99,9 @@ function Contact(props)
     const linkedin = logos.nodes.LinkedIn
     const youtube = logos.nodes.youtube
 
-    applyProps(github, { material: new THREE.MeshBasicMaterial({ color: '#ffffff' })})
-    applyProps(linkedin, { material: new THREE.MeshBasicMaterial({ color: '#00a5d4' })})
-    applyProps(youtube, { material: new THREE.MeshBasicMaterial({ color: '#ff0000' })})
+    applyProps(github, { material: new THREE.MeshStandardMaterial({ color: '#ffffff', emissive: '#ffffff', emissiveIntensity: 3 })})
+    applyProps(linkedin, { material: new THREE.MeshStandardMaterial({ color: '#00a5d4', emissive: '#00a5d4', emissiveIntensity: 5 })})
+    applyProps(youtube, { material: new THREE.MeshStandardMaterial({ color: '#ff0000', emissive: '#ff0000', emissiveIntensity: 3 })})
 
     const contacts = [
         {media: github, link: 'https://github.com/MichaelCSI'},
@@ -168,8 +175,8 @@ function Signature(props)
         // Color
         const intensity = 0.5
         const r = Math.sin(time) * intensity + intensity
-        const g = Math.sin(0.7 * time + 2 * Math.PI / 3) * intensity + intensity
-        const b = Math.sin(0.5 * time + 2 * 2 * Math.PI / 3) * intensity + intensity
+        const g = Math.sin(0.6 * time) * intensity + intensity
+        const b = Math.sin(0.2 * time) * intensity + intensity
         trailRefs.forEach((trail) => {
             trail.current.material.color.set(r, g, b)
         })
