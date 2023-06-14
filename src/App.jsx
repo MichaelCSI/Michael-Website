@@ -17,10 +17,10 @@ export default function App(){
                         <Canvas
                             flat
                             camera={ {
-                                fov: 45,
+                                fov: 10,
                                 near: 0.1,
                                 far: 2000,
-                                position: [ 0, 1, 8 ]
+                                position: [ 0, 0.5, 11 ]
                             } }
                         >
                             <Nav/>
@@ -52,13 +52,13 @@ export default function App(){
                         <Canvas
                             flat
                             camera={ {
-                                fov: 10,
+                                fov: 45,
                                 near: 0.1,
                                 far: 2000,
-                                position: [ 0, 0.5, 11 ]
+                                position: [ 0, 1, 8 ]
                             } }
                         >
-                            {/* <Nav/> */}
+                            <Nav/>
                             <Games/>
                         </Canvas>
                     }

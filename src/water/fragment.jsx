@@ -22,26 +22,28 @@ const fragmentShader = /* glsl */`
         vec2 uv = gl_FragCoord.xy / uViewPort;
 
         float dist = distance(uv, uPointerCoordinates);
-        float range = (pow(uPointerSize, uPointerCoordinates.y) / pow(uPointerCoordinates.y, 2.0));
-        float mixAmmount = clamp(dist / range, 0.0, 1.0 );
+        float rangeY = pow(uPointerSize, uPointerCoordinates.y);
+        float mixAmmount = clamp(dist / rangeY / pow(uPointerCoordinates.y, 2.0), 0.0, 1.0 );
+
+        float maxXY = max(uPointerCoordinates.x, uPointerCoordinates.y);
 
         if(uShaderMode == 1) {
             gl_FragColor = vec4(color, 1.0);
         } else if (uShaderMode == 2) {
-            if(dist < range){
-                float maxXY = max(uPointerCoordinates.x, uPointerCoordinates.y);
-                vec3 colorMouse = mix(color, vec3(maxXY, maxXY, 1.0), mixStrength);
-                gl_FragColor = vec4(colorMouse, 1.0);        
-            } else {
-                gl_FragColor = vec4(color, 1.0);
-            }
+            vec3 colorMouse = mix(color, vec3(uPointerCoordinates.x / 2.0, 1.0, 1.0), mixStrength / dist * clamp(rangeY, 0.01, 0.5));
+            vec3 colorWater = mix(colorMouse, vec3(uPointerCoordinates.x, uPointerCoordinates.x, 1.0), mixStrength);
+            gl_FragColor = vec4(colorWater, 1.0);        
         } else if(uShaderMode == 3) {
-            float maxXY = max(uPointerCoordinates.x, uPointerCoordinates.y);
             vec3 colorMouse = mix(color, vec3(maxXY, maxXY, 1.0), mixAmmount);
             gl_FragColor = vec4(colorMouse, 1.0);         
         } else if(uShaderMode == 4) {
             gl_FragColor = vec4(mix(color, vec3(uPointerCoordinates, 1.0), mixStrength), 1.0);         
+        } else {
+            vec3 colorMouse = mix(color, vec3(uPointerCoordinates.x / 2.5, 0.5, 0.8), mixStrength / dist * pow(rangeY + 0.1, 3.0));
+            vec3 colorWater = mix(colorMouse, vec3(uPointerCoordinates.x, uPointerCoordinates.x, 1.0), mixStrength);
+            gl_FragColor = vec4(colorWater, 1.0);       
         }
+        
     }
 `
 

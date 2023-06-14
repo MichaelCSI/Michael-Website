@@ -1,28 +1,3 @@
-// Credits:
-
-// Name: 3D Brand Logos Free low-poly 3D model
-// Author: AtroRocket
-// Link: https://www.cgtrader.com/free-3d-models/architectural/decoration/3d-brand-logos
-
-// * title:	Computer
-// * source:	https://sketchfab.com/3d-models/computer-ac4fc7339cd643aa93a0ea0c5b12544c
-// * author:	inesmerino (https://sketchfab.com/inesmerino)
-
-// * title:	TV
-// * source:	https://sketchfab.com/3d-models/tv-ee802eec0b5742f2b036ea986b89ad88
-// * author:	shedmon (https://sketchfab.com/shedmon)
-
-// * title:	PS2 Controller
-// * source:	https://sketchfab.com/3d-models/ps2-controller-3b641465a47049c4b4cc02b004757e4a
-// * author:	Jeffrey fan 2000 (https://sketchfab.com/8723516)
-
-// * title:	ps2 Console
-// * source:	https://sketchfab.com/3d-models/ps2-console-b20d0f22228b49e1b06ac252d0a799f3
-// * author:	Jeffrey fan 2000 (https://sketchfab.com/8723516)
-
-// Pong gif: https://henrikostergaard.com/home
-
-import ReactAtom from './ReactAtom.jsx'
 import { 
     useGLTF, 
     Trail, 
@@ -30,67 +5,136 @@ import {
     OrbitControls,
     Environment,
     Text,
-    Sky
+    Sky,
+    useAnimations,
+    Center,
+    Stars
 } from '@react-three/drei'
-import { useFrame, applyProps } from '@react-three/fiber'
+import { useFrame, applyProps, useThree } from '@react-three/fiber'
 import * as THREE from 'three'
-import { useRef, useState } from 'react'
-import Setup from './Setup.jsx'
+import { useRef, useMemo, useEffect, useState } from 'react'
 import { EffectComposer, Bloom } from '@react-three/postprocessing'
+import vertexShader from './water/vertex.jsx'
+import fragmentShader from './water/fragment.jsx'
+import SunMoon from './SunMoon.jsx'
 
-export default function Home()
-{
 
-    const meRef = useRef()
+export default function Games(){
+    const ocean = useRef()
+    const uniforms = useMemo(
+        () => ({
+            uTime: { value: 0 },
+            uBigWavesElevation: { value: 0.07 },
+            uBigWavesFrequency: { value: new THREE.Vector2(2, 1.5) },
+            uBigWavesSpeed: { value: 0.6 },
+
+            uSmallWavesElevation: { value: 0.05 },
+            uSmallWavesFrequency: { value: 4 },
+            uSmallWavesSpeed: { value: 0.1 },
+            uSmallIterations: { value: 2 },
+            uXOffset: { value: 4 },
+
+            uPointerCoordinates: { value: new THREE.Vector2(0, 0) },
+            uViewPort: { value: new THREE.Vector2(0, 0) },
+            uPointerSize: { value: 0.1 },
+    
+            uDepthColor: { value: new THREE.Color('#0f4764') },
+            uSurfaceColor: { value: new THREE.Color('#5f88a2') },
+            uColorOffset: { value: 0.01 },
+            uColorMultiplier: { value: 5 },
+
+            uShaderMode: { value: 5 }
+
+        }), []
+    );  
+
+
+    const groupRef = useRef()
+    const sun1Ref = useRef()
+    const sun2Ref = useRef()
+    const moon1Ref = useRef()
+    const moon2Ref = useRef()
+
+    const [showAlternate, setShowAlternate] = useState(false)
+
+    const bgRef = useRef()
+
     useFrame((state) => {
         const time = state.clock.elapsedTime
-        meRef.current.fillOpacity = Math.sin(time) + 3
+
+        // Shader
+        ocean.current.material.uniforms.uTime.value = time
+        ocean.current.material.uniforms.uXOffset.value = 0.5 * Math.sin(0.2 * time) + 4
+
+        const pointerX = state.pointer.x + 1
+        const pointerY = state.pointer.y + 1
+        ocean.current.material.uniforms.uPointerCoordinates.value = new THREE.Vector2(pointerX, pointerY)
+
+        const viewPort = state.size
+        ocean.current.material.uniforms.uViewPort.value = new THREE.Vector2(viewPort.width, viewPort.height)
+
+        // Sun and Moon
+        // groupRef.current.position.x = 5 * Math.sin(0.1 * time)
+        // groupRef.current.position.y = 0.5 * Math.cos(0.1 * time)
+        // sun1Ref.current.position.z = 10 * Math.cos(0.1 * time)
+        if(time % 2 < 1){
+            setShowAlternate(false)
+        } else{
+            setShowAlternate(true)
+        }
+
+        // Background
+        const amp = 0.05
+        const sTime = amp * Math.sin(time * 0.8) + amp
     })
 
+    const { viewport } = useThree()
+
     return <>
-        <Environment files='./hdrs/evening_road_01_puresky_4k.hdr' background={ true }/>
-        <color args={['#110050']} attach='background'/>
+        <OrbitControls/>
         <EffectComposer>
             <Bloom
-                mipmapBlur
-                intensity={ 0.4 }
+               mipmapBlur
+               intensity={ 0.4 }
             />
         </EffectComposer>
-        <OrbitControls/>
-        <Text
-            ref={ meRef }
-            font="./fonts/SourceCodePro-BlackItalic.ttf"
-            fontSize={ 0.2 }
-            outlineWidth={ 0.02 }
-            outlineColor='#000000'
-            maxWidth={ 3 }
-            color={ '#61dbfb' }
-            position={ [-4, 1, 0] }
-        >
-            Bla bla bla, I am Michael from planet Earth and this is my website
-        </Text>
-        <ReactAtom 
-            position={ [-4, -1, 0] }
-            scaleRatio={ 0.8 }
+        <Environment files='./hdrs/evening_road_01_puresky_4k.hdr'/>
+        <color ref={ bgRef } args={['#000000']} attach='background'/>
+        <mesh ref={ ocean } position={[0, -1.5, -10]} rotation={[-Math.PI / 2 - 0.08, 0, 0]} scale={1}>
+            <planeGeometry args={[20, 40, 512, 1024]} />
+            <shaderMaterial
+                fragmentShader={fragmentShader}
+                vertexShader={vertexShader}
+                uniforms={uniforms}
+            />
+        </mesh>
+        <SunMoon 
+            position={ [0, 0.5, -10] }
+            scale={ [0.0001, 0.0001, 0.0001] }
+            showAlternate={ showAlternate }
+            groupRef={ groupRef }
+            sun1Ref={ sun1Ref }
+            sun2Ref={ sun2Ref }
+            moon1Ref={ moon1Ref }
+            moon2Ref={ moon2Ref }
         />
-        <group position={ [0, -0.5, 0] }>
-            {/* <ReactAtom 
-                position={ [-1.35, 0.3, 0.25] }
-                scaleRatio={ 0.3 }
-            /> */}
-            <Contact
-                rotation={ [Math.PI / 2, 0, 0] } 
-                position={ [-0.1, 0.05, 0.25] } 
-                scale={ [0.3, 0.3, 0.3] }
-            />
-            <Signature
-                position={ [1, 0.8, 1.91] }
-                amp={ 0.1 }
-            />
-            <Setup/>
-        </group>
+        <Contact
+            rotation={ [Math.PI / 2, 0, 0] } 
+            position={ [ - viewport.width * 0.85, viewport.height * 0.6, -10] } 
+            scale={ [0.15, 0.15, 0.15] }
+        />
+        <Stars
+            radius={ 10 }
+            depth={ 10 }
+            factor={ 2 } 
+            fade 
+            speed={ 2 }
+            count={ 10000 }
+        />
     </>
 }
+
+
 
 function Contact(props)
 {
@@ -100,7 +144,7 @@ function Contact(props)
     const youtube = logos.nodes.youtube
 
     applyProps(github, { material: new THREE.MeshStandardMaterial({ color: '#ffffff', emissive: '#ffffff', emissiveIntensity: 3 })})
-    applyProps(linkedin, { material: new THREE.MeshStandardMaterial({ color: '#00a5d4', emissive: '#00a5d4', emissiveIntensity: 5 })})
+    applyProps(linkedin, { material: new THREE.MeshStandardMaterial({ color: '#00a5d4', emissive: '#00a5d4', emissiveIntensity: 3 })})
     applyProps(youtube, { material: new THREE.MeshStandardMaterial({ color: '#ff0000', emissive: '#ff0000', emissiveIntensity: 3 })})
 
     const contacts = [
@@ -133,76 +177,3 @@ function Contact(props)
         </group>
     </>
 }
-
-function Signature(props)
-{
-    const mRef = useRef()
-    const oRef = useRef()
-    const dotRef = useRef()
-    const bounceRef = useRef()
-
-    const trailRefs = [useRef(), useRef(), useRef(), useRef()]
-    const [showTrail, setShowTrail] = useState(false)
-
-    const amp = props.amp
-
-    useFrame((state) => {
-        const time = state.clock.elapsedTime
-       
-        // Position M
-        const freqM = 2
-        const xM = amp * Math.sin(freqM * time) + amp * 0.01 * Math.sin(time * freqM * 0.6)
-        const yM = 2 * amp * ((Math.abs(Math.sin(freqM * time))) + 1.3 * Math.abs(Math.cos(freqM * time)))
-        mRef.current.position.set(xM, yM, 0)
-
-        // Position O
-        const freqO = 5
-        const xO = -amp * 0.8 * Math.sin(freqO * time) + amp * 2.8
-        const yO = amp * 0.8 * Math.cos(freqO * time) + amp * 2.7
-        oRef.current.position.set(xO, yO, 0)
-        // Position dot
-        const freqDot = 5
-        const xDot = amp * 0.05 * Math.sin(freqDot * time) + amp * 1.6
-        const yDot = amp * 0.05 * Math.cos(freqDot * time) + amp * 2.1
-        dotRef.current.position.set(xDot, yDot, 0)
-
-        // Position bounce
-        const freqBounce = 0.5
-        const xBounce = 2.5 * amp * Math.sin(freqBounce * time) + amp * 1.2
-        const yBounce = 0.3 * amp * (Math.abs(Math.cos(freqBounce * time * 16))) + amp
-        bounceRef.current.position.set(xBounce, yBounce, 0)
-
-        // Color
-        const intensity = 0.5
-        const r = Math.sin(time) * intensity + intensity
-        const g = Math.sin(0.6 * time) * intensity + intensity
-        const b = Math.sin(0.2 * time) * intensity + intensity
-        trailRefs.forEach((trail) => {
-            trail.current.material.color.set(r, g, b)
-        })
-
-        // Done to fix the trail starting/rendering at center screen briefly
-        if(time > 0.2) {
-            setShowTrail(true)
-        }
-    })
-
-    return <>
-        <group position={ props.position }>
-            {[mRef, oRef, dotRef, bounceRef].map((r, index) => (
-                    <Trail
-                        key={ 'trail'+index }
-                        ref={ trailRefs[index] }
-                        width={ 0.14 * amp}
-                        length={ 100 }
-                        decay={ showTrail ? 3 : 1000 }
-                        attenuation={(width) => width*10}
-                    >
-                    <mesh ref={ r }/>          
-                </Trail>
-            ))}
-        </group>
-    </>
-}
-
-
