@@ -6,7 +6,6 @@ source: https://sketchfab.com/3d-models/neon-sun-moon-a0d6ad76fa4f494f82a8e92b8c
 title: Neon Sun & Moon
 */
 
-import { EffectComposer, SelectiveBloom } from '@react-three/postprocessing'
 import { useGLTF } from "@react-three/drei";
 
 export default function SunMoon(props) {
@@ -23,7 +22,6 @@ export default function SunMoon(props) {
             {!props.showAlternate && 
             <>
                 <mesh
-                    ref={ props.sun1Ref }
                     name="Sun1"
                     geometry={nodes.Object_22.geometry}
                     material={materials["neon.sun1"]}
@@ -36,7 +34,6 @@ export default function SunMoon(props) {
                     }
                 />
                 <mesh
-                    ref={ props.moon1Ref }
                     name="Moon1"
                     geometry={nodes.Object_24.geometry}
                     material={materials["neon.moon1"]}
@@ -52,7 +49,6 @@ export default function SunMoon(props) {
             {props.showAlternate && 
             <>
                 <mesh
-                    ref={ props.sun2Ref }
                     name="Sun2"
                     geometry={nodes.Object_26.geometry}
                     material={materials["neon.sun2"]}
@@ -65,7 +61,6 @@ export default function SunMoon(props) {
                     }
                 />
                 <mesh
-                    ref={ props.moon2Ref }
                     name="Moon2"
                     geometry={nodes.Object_28.geometry}
                     material={materials["neon.moon2"]}

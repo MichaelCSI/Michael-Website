@@ -14,6 +14,7 @@ export default function App(){
                 <Route 
                     exact path='/' 
                     element={
+                        <>
                         <Canvas
                             flat
                             camera={ {
@@ -23,9 +24,10 @@ export default function App(){
                                 position: [ 0, 0.5, 11 ]
                             } }
                         >
-                            <Nav/>
+                            {/* <Nav/> */}
                             <Home/>
                         </Canvas>
+                        </>
                     }
                 />
                 <Route 

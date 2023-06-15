@@ -18,5 +18,8 @@ export default {
         outDir: '../dist',
         emptyOutDir: true,
         sourcemap: true
+    },
+    optimizeDeps: {
+        exclude: ['js-big-decimal']
     }
 }

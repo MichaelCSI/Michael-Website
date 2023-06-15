@@ -38,7 +38,7 @@ import { useRef, useState } from 'react'
 import Setup from './Setup.jsx'
 import { EffectComposer, Bloom } from '@react-three/postprocessing'
 
-export default function Home()
+export default function Games()
 {
 
     const meRef = useRef()
