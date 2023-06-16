@@ -13,6 +13,7 @@ export default function LinkText(props)
                 fontSize={ props.fontSize }
                 maxWidth={ 2 }
                 color={ props.textPrimary }
+                outlineWidth={ props.fontSize ? props.fontSize / 10 : 0.04 }
             >
                 {props.text}
             </Text>
@@ -23,9 +24,7 @@ export default function LinkText(props)
                 color={ buttonHover ? props.textSecondary : props.textPrimary}
                 outlineWidth={ props.fontSize ? props.fontSize / 8 : 0.05 }
                 outlineColor='#000000'
-                onClick={() => {
-                    props.newTab ? window.open(props.media, '_blank') : window.open(props.media, "_self")
-                }}
+                onClick={() => { window.open(props.media, '_blank') }}
                 onPointerEnter={ () => { 
                     document.body.style.cursor = 'pointer' 
                     setButtonHover(!buttonHover)

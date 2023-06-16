@@ -1,7 +1,7 @@
 export default [
     {
         model: './models/laptop.gltf',
-        position: [0, -0.3, 0],
+        position: [0, 2, 0],
         image: {
             scale: [3, 2, 1],
             position: [ 0, 1.56, - 1.4 ],
@@ -37,7 +37,7 @@ export default [
     },
     {
         model: './models/umbrella.gltf',
-        position: [0, 0.5, 0],
+        position: [0, -2, 0],
         rotation: [0, Math.PI * 1.2, 0],
         scale: [1.3, 1.3, 1.3],
         linkText: {

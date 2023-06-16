@@ -14,12 +14,89 @@ import {
     Text
 } from '@react-three/drei'
 
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { useFrame, applyProps } from '@react-three/fiber'
 import { Canvas } from '@react-three/fiber'
 
 // 3D models are from https://market.pmnd.rs/
-export default function Portfolio() {
+export default function Portfolio(props) {
+    return (
+        <>
+            <Project
+                position={[3, -0.5, 0]}
+                scale={[1.5, 1.5, 1.5]}
+                model={{
+                    source: './models/laptop.gltf'
+                }}
+                image={{
+                    scale: [3, 2, 1],
+                    position: [0, 1.56, -1.4],
+                    rotation: [-0.256, 0, 0],
+                    url: './images/galaxy.png'
+                }}
+                title={{
+                    media: 'https://threejs-practice-pi.vercel.app/',
+                    text: 'Three Galaxy',
+                    fontSize: 0.4,
+                    primaryColor: '#ff6030',
+                    secondaryColor: '#d0312d',
+                    position: [2.5, 2.2, 0]
+                }}
+            />
+            <Project
+                position={[2.7, 0, 0]}
+                scale={[1.5, 1.5, 1.5]}
+                model={{
+                    source: './models/phone.gltf',
+                    rotation: [-0.4, 0, 0],
+                }}
+                image={{
+                    scale: [1.38, 2.93, 1],
+                    position: [0.17, 1.35, -0.48],
+                    url: './images/hackathonApp.jpeg',
+                    rotation: [-0.4, 0, 0],
+                    style: { borderRadius: '50%' }
+
+                }}
+                title={{
+                    media: 'https://devpost.com/software/skin-cancer-detection-app-fm7ptq',
+                    text: 'Skin Cancer Detection App',
+                    fontSize: 0.4,
+                    primaryColor: '#fe7f9c',
+                    secondaryColor: '#f14d73',
+                    position: [2.2, 1.5, 0]
+                }}
+            />
+            <Project
+                position={[2.5, 0, 0]}
+                scale={[1.7, 1.7, 1.7]}
+                model={{
+                    source: './models/umbrella.gltf',
+                    rotation: [0, Math.PI * 1.2, 0]
+                }}
+                title={{
+                    media: 'https://www.youtube.com/channel/UCo9DGaDW1IbWbTjPcEJQELg',
+                    text: 'Unity/Blender',
+                    fontSize: 0.35,
+                    primaryColor: '#4e97d1',
+                    secondaryColor: '#00569d',
+                    position: [2.3, 1.2, 0.1]
+                }}
+            />
+        </>
+    )
+}
+
+function Project(props) {
+    const model = useGLTF(props.model.source)
+
+    // Adjust phone screen to white
+    if (model.nodes.SCREEN) {
+        applyProps(model.nodes.SCREEN, {
+            material: new THREE.MeshBasicMaterial({ color: '#ffffff' })
+        })
+    }
+
     return (
         <>
             <Canvas
@@ -31,6 +108,7 @@ export default function Portfolio() {
                     position: [0, 4, 12]
                 }}
             >
+                {/* <OrbitControls/> */}
                 <Environment files="./hdrs/evening_road_01_puresky_4k.hdr" />
                 {/* <Sky azimuth={0.75} rayleigh={0.3} /> */}
                 <rectAreaLight
@@ -46,109 +124,35 @@ export default function Portfolio() {
                     opacity={0.5}
                     scale={30}
                     blur={2.4}
+                    frames={1}
                 />
-                <ScrollControls infinite={true} pages={4} horizontal={true}>
-                    <Float
-                        rotationIntensity={0.2}
-                        speed={2}
-                        floatIntensity={0.5}
-                    >
-                        {MODELS.map((model, index) => (
-                            <Model
-                                numModels={MODELS.length}
-                                modelIndex={index}
-                                key={model.model}
-                                model={model.model}
-                                position={model.position}
-                                rotation={model.rotation}
-                                scale={model.scale}
-                                image={
-                                    model.image ? (
-                                        <Image
-                                            scale={model.image.scale}
-                                            position={model.image.position}
-                                            rotation={model.image.rotation}
-                                            url={model.image.url}
-                                        />
-                                    ) : null
-                                }
-                                text={
-                                    model.linkText ? (
-                                        <LinkText
-                                            media={model.linkText.media}
-                                            newTab={true}
-                                            text={model.linkText.text}
-                                            fontSize={model.linkText.fontSize}
-                                            textPrimary={
-                                                model.linkText.textPrimary
-                                            }
-                                            textSecondary={
-                                                model.linkText.textSecondary
-                                            }
-                                            position={model.linkText.position}
-                                        />
-                                    ) : null
-                                }
+                <Float rotationIntensity={0.2} speed={2} floatIntensity={0.5}>
+                    <group position={props.position} scale={props.scale}>
+                        <primitive
+                            object={model.scene}
+                            rotation={props.model.rotation}
+                        />
+                        {props.image ? (
+                            <Image
+                                scale={props.image.scale}
+                                position={props.image.position}
+                                rotation={props.image.rotation}
+                                url={props.image.url}
                             />
-                        ))}
-                        <Text
-                            font="./fonts/bangers-v20-latin-regular.woff"
-                            fontSize={0.7}
-                            position={[0, 4, 0]}
-                        >
-                            Scroll Down!
-                        </Text>
-                    </Float>
-                </ScrollControls>
+                        ) : null}
+                        {props.title ? (
+                            <LinkText
+                                media={props.title.media}
+                                text={props.title.text}
+                                fontSize={props.title.fontSize}
+                                textPrimary={props.title.primaryColor}
+                                textSecondary={props.title.secondaryColor}
+                                position={props.title.position}
+                            />
+                        ) : null}
+                    </group>
+                </Float>
             </Canvas>
-        </>
-    )
-}
-
-function Model(props) {
-    const model = useGLTF(props.model)
-    const modelRef = useRef()
-    const scroll = useScroll()
-    const modelOffset = (Math.PI * 2) / props.numModels
-
-    // Adjust phone screen to white
-    if (model.nodes.SCREEN) {
-        applyProps(model.nodes.SCREEN, {
-            material: new THREE.MeshBasicMaterial({ color: '#ffffff' })
-        })
-    }
-
-    useFrame(() => {
-        const offset = -scroll.offset * Math.PI * 2
-        const radius = 4
-
-        modelRef.current.position.x =
-            Math.sin(offset + props.modelIndex * modelOffset) * radius - 1
-        modelRef.current.position.z =
-            Math.cos(offset + props.modelIndex * modelOffset) * radius
-
-        // "Normalize" Z to [0, 1.5], scale model based on Z
-        const range = modelRef.current.position.z / radius
-        const zPosNormalized = (range + 1.1) / 1.5
-        modelRef.current.scale.set(
-            zPosNormalized,
-            zPosNormalized,
-            zPosNormalized
-        )
-    })
-
-    return (
-        <>
-            <group position={props.position} ref={modelRef}>
-                <primitive
-                    object={model.scene}
-                    rotation={props.rotation}
-                    scale={props.scale}
-                >
-                    {props.image}
-                </primitive>
-                {props.text}
-            </group>
         </>
     )
 }
