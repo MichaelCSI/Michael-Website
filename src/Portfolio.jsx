@@ -10,7 +10,8 @@ import {
     Image,
     Float,
     Sky,
-    OrbitControls
+    OrbitControls,
+    Text
 } from '@react-three/drei'
 
 import { useRef } from 'react'
@@ -30,9 +31,8 @@ export default function Portfolio() {
                     position: [0, 4, 12]
                 }}
             >
-                {/* <OrbitControls/> */}
                 <Environment files="./hdrs/evening_road_01_puresky_4k.hdr" />
-                <Sky azimuth={0.75} rayleigh={0.3} />
+                {/* <Sky azimuth={0.75} rayleigh={0.3} /> */}
                 <rectAreaLight
                     width={2.5}
                     height={1.65}
@@ -46,7 +46,6 @@ export default function Portfolio() {
                     opacity={0.5}
                     scale={30}
                     blur={2.4}
-                    // frames= { 1 }
                 />
                 <ScrollControls infinite={true} pages={4} horizontal={true}>
                     <Float
@@ -92,6 +91,13 @@ export default function Portfolio() {
                                 }
                             />
                         ))}
+                        <Text
+                            font="./fonts/bangers-v20-latin-regular.woff"
+                            fontSize={0.7}
+                            position={[0, 4, 0]}
+                        >
+                            Scroll Down!
+                        </Text>
                     </Float>
                 </ScrollControls>
             </Canvas>
@@ -112,8 +118,7 @@ function Model(props) {
         })
     }
 
-    useFrame((state) => {
-        const time = state.clock.elapsedTime
+    useFrame(() => {
         const offset = -scroll.offset * Math.PI * 2
         const radius = 4
 
