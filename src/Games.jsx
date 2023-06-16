@@ -23,10 +23,10 @@
 // Pong gif: https://henrikostergaard.com/home
 
 import ReactAtom from './ReactAtom.jsx'
-import { 
-    useGLTF, 
-    Trail, 
-    Float, 
+import {
+    useGLTF,
+    Trail,
+    Float,
     OrbitControls,
     Environment,
     Text,
@@ -38,57 +38,32 @@ import { useRef, useState } from 'react'
 import Setup from './Setup.jsx'
 import { EffectComposer, Bloom } from '@react-three/postprocessing'
 
-export default function Games()
-{
-
-    const meRef = useRef()
-    useFrame((state) => {
-        const time = state.clock.elapsedTime
-        meRef.current.fillOpacity = Math.sin(time) + 3
-    })
-
-    return <>
-        <Environment files='./hdrs/evening_road_01_puresky_4k.hdr' background={ true }/>
-        <color args={['#110050']} attach='background'/>
-        <EffectComposer>
-            <Bloom
-                mipmapBlur
-                intensity={ 0.4 }
-            />
-        </EffectComposer>
-        <OrbitControls/>
-        <Text
-            ref={ meRef }
-            font="./fonts/SourceCodePro-BlackItalic.ttf"
-            fontSize={ 0.2 }
-            outlineWidth={ 0.02 }
-            outlineColor='#000000'
-            maxWidth={ 3 }
-            color={ '#61dbfb' }
-            position={ [-4, 1, 0] }
-        >
-            Bla bla bla, I am Michael from planet Earth and this is my website
-        </Text>
-        <ReactAtom 
-            position={ [-4, -1, 0] }
-            scaleRatio={ 0.8 }
-        />
-        <group position={ [0, -0.5, 0] }>
-            {/* <ReactAtom 
-                position={ [-1.35, 0.3, 0.25] }
-                scaleRatio={ 0.3 }
-            /> */}
-            <Signature
-                position={ [1, 0.8, 1.91] }
-                amp={ 0.1 }
-            />
-            <Setup/>
-        </group>
-    </>
+export default function Games() {
+    return (
+        <>
+            <Canvas
+                flat
+                camera={{
+                    fov: 45,
+                    near: 0.1,
+                    far: 2000,
+                    position: [0, 1, 8]
+                }}
+            >
+                <Environment files="./hdrs/evening_road_01_puresky_4k.hdr" />
+                <color args={['#000000']} attach="background" />
+                <OrbitControls />
+                <group position={[0, -0.5, 0]}>
+                    <ReactAtom position={[-1.35, 0.3, 0.25]} scaleRatio={0.3} />
+                    <Signature position={[1, 0.8, 1.91]} amp={0.1} />
+                    <Setup />
+                </group>
+            </Canvas>
+        </>
+    )
 }
 
-function Signature(props)
-{
+function Signature(props) {
     const mRef = useRef()
     const oRef = useRef()
     const dotRef = useRef()
@@ -101,11 +76,17 @@ function Signature(props)
 
     useFrame((state) => {
         const time = state.clock.elapsedTime
-       
+
         // Position M
         const freqM = 2
-        const xM = amp * Math.sin(freqM * time) + amp * 0.01 * Math.sin(time * freqM * 0.6)
-        const yM = 2 * amp * ((Math.abs(Math.sin(freqM * time))) + 1.3 * Math.abs(Math.cos(freqM * time)))
+        const xM =
+            amp * Math.sin(freqM * time) +
+            amp * 0.01 * Math.sin(time * freqM * 0.6)
+        const yM =
+            2 *
+            amp *
+            (Math.abs(Math.sin(freqM * time)) +
+                1.3 * Math.abs(Math.cos(freqM * time)))
         mRef.current.position.set(xM, yM, 0)
 
         // Position O
@@ -122,7 +103,8 @@ function Signature(props)
         // Position bounce
         const freqBounce = 0.5
         const xBounce = 2.5 * amp * Math.sin(freqBounce * time) + amp * 1.2
-        const yBounce = 0.3 * amp * (Math.abs(Math.cos(freqBounce * time * 16))) + amp
+        const yBounce =
+            0.3 * amp * Math.abs(Math.cos(freqBounce * time * 16)) + amp
         bounceRef.current.position.set(xBounce, yBounce, 0)
 
         // Color
@@ -135,27 +117,27 @@ function Signature(props)
         })
 
         // Done to fix the trail starting/rendering at center screen briefly
-        if(time > 0.2) {
+        if (time > 0.2) {
             setShowTrail(true)
         }
     })
 
-    return <>
-        <group position={ props.position }>
-            {[mRef, oRef, dotRef, bounceRef].map((r, index) => (
+    return (
+        <>
+            <group position={props.position}>
+                {[mRef, oRef, dotRef, bounceRef].map((r, index) => (
                     <Trail
-                        key={ 'trail'+index }
-                        ref={ trailRefs[index] }
-                        width={ 0.14 * amp}
-                        length={ 100 }
-                        decay={ showTrail ? 3 : 1000 }
-                        attenuation={(width) => width*10}
+                        key={'trail' + index}
+                        ref={trailRefs[index]}
+                        width={0.14 * amp}
+                        length={100}
+                        decay={showTrail ? 3 : 1000}
+                        attenuation={(width) => width * 10}
                     >
-                    <mesh ref={ r }/>          
-                </Trail>
-            ))}
-        </group>
-    </>
+                        <mesh ref={r} />
+                    </Trail>
+                ))}
+            </group>
+        </>
+    )
 }
-
-

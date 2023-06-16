@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body,
+#root
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+canvas
+{
+    touch-action: none;
+}
+
+.games img
+{
+    width: 900px;
+    height: 700px;
+    border: none;
+    border-radius: 60px;
+}
+/* .games video
+{
+    border: none;
+    border-radius: 100px;
+    object-fit: cover;
+} */
+.aboutMe iframe
+{
+    width: 1000px;
+    height: 720px;
+    border: none;
+}
