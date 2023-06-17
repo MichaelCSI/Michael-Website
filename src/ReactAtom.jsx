@@ -5,7 +5,7 @@ import { useRef, useState } from 'react'
 
 export default function ReactAtom(props)
 {
-    const scaleRatio = props.scaleRatio
+    const scaleRatio = props.scaleRatio ? props.scaleRatio : 0.5
     const textRef = useRef()
     useFrame((state) => {
         const time = state.clock.elapsedTime

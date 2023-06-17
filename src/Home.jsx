@@ -3,21 +3,38 @@ import { applyProps } from '@react-three/fiber'
 import * as THREE from 'three'
 import { useState } from 'react'
 import { Canvas } from '@react-three/fiber'
-import HomeLayout from './HomeLayout.jsx'
 import Portfolio from './Portfolio.jsx'
 
 export default function Home() {
     return (
         <div className="h-screen overflow-y-scroll bg-gradient-to-br from-green3 via-green2 to-green1">
             <div className="h-[0vh]">
-                <HomeLayout />
+                <Intro />
             </div>
             <div className="md:mt-0 md:h-full md:w-full">
-                <Items rotation={[0, -Math.PI / 4, 0]} position={[0.6, 2, 6]} />
+                <Items
+                    rotation={[0, -Math.PI / 8, 0]}
+                    position={[0.6, 2, 6]}
+                    scale={[2, 2, 2]}
+                />
             </div>
             <div className="h-[100vh]">
-                    <Portfolio />
+                <Portfolio />
             </div>
+        </div>
+    )
+}
+
+function Intro() {
+    return (
+        <div className="relative left-[8vw] top-[4vh]">
+            <h1 className="text-primary  md:text-[90px]">
+                <span className="text-[30px] font-normal">Hey,</span>
+                <br /> I'm Michael
+            </h1>
+            <p className="mt-8 text-[20px] text-primary">
+                Welcome to my portfolio
+            </p>
         </div>
     )
 }
@@ -58,7 +75,11 @@ function Items(props) {
                 }}
             >
                 <Environment files="./hdrs/evening_road_01_puresky_4k.hdr" />
-                <group rotation={props.rotation} position={props.position}>
+                <group
+                    rotation={props.rotation}
+                    position={props.position}
+                    scale={props.scale}
+                >
                     <Model
                         name="boxTV"
                         scale={[scaleRatio, scaleRatio, scaleRatio]}
@@ -93,7 +114,7 @@ function Items(props) {
                     />
                     <Html
                         transform
-                        wrapperClass="games"
+                        wrapperClass="screen"
                         distanceFactor={scaleRatio * 150}
                         position={[
                             scaleRatio * 375,
@@ -103,21 +124,6 @@ function Items(props) {
                     >
                         <img src="./images/pong.gif" />
                     </Html>
-                    {/* <Html
-                    transform
-                    wrapperClass="games"
-                    distanceFactor={scaleRatio * 150}
-                    position={[
-                        scaleRatio * 375,
-                        scaleRatio * 95,
-                        scaleRatio * 115
-                    ]}
-                    scale={ [0.67, 0.85, 1] }
-                >
-                    <video autoPlay loop muted>
-                        <source src="./images/hello.mov" type="video/mp4" />
-                    </video>
-                </Html>*/}
                 </group>
             </Canvas>
         </>

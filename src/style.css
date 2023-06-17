@@ -18,22 +18,10 @@ canvas
     touch-action: none;
 }
 
-.games img
+.screen img
 {
     width: 900px;
     height: 700px;
     border: none;
     border-radius: 60px;
-}
-/* .games video
-{
-    border: none;
-    border-radius: 100px;
-    object-fit: cover;
-} */
-.aboutMe iframe
-{
-    width: 1000px;
-    height: 720px;
-    border: none;
 }
