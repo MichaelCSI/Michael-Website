@@ -12,16 +12,3 @@ body,
     width: 100%;
     height: 100%;
 }
-
-canvas
-{
-    touch-action: none;
-}
-
-.screen img
-{
-    width: 900px;
-    height: 700px;
-    border: none;
-    border-radius: 60px;
-}

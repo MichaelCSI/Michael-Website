@@ -1,146 +1,103 @@
-import { useGLTF, Html, OrbitControls, Environment } from '@react-three/drei'
-import { applyProps } from '@react-three/fiber'
-import * as THREE from 'three'
-import { useState } from 'react'
-import { Canvas } from '@react-three/fiber'
 import Portfolio from './Portfolio.jsx'
+import Contact from './Contact.jsx'
+import Items from './Items.jsx'
+
+// Pong gif source: https://henrikostergaard.com/home
 
 export default function Home() {
     return (
-        <div className="h-screen overflow-y-scroll bg-gradient-to-br from-green3 via-green2 to-green1">
-            <div className="h-[0vh]">
-                <Intro />
-            </div>
-            <div className="md:mt-0 md:h-full md:w-full">
+        <div className="h-[100vh] overflow-y-scroll bg-gradient-to-br from-bg1 via-bg2 to-bg3">
+            <div className="relative flex flex-col md:flex-row">
+                <div className="mx-4 w-[100vw] md:mx-20 md:w-[50vw] ">
+                    <p className="mb-1 ml-1 mt-20 text-xl font-normal text-primary md:text-4xl">
+                        Hey,
+                    </p>
+                    <h1 className="text-8xl text-primary">I'm Michael</h1>
+                    <p className="ml-1 mt-8 text-3xl text-primary">
+                        Welcome to my portfolio
+                    </p>
+                </div>
                 <Items
                     rotation={[0, -Math.PI / 8, 0]}
-                    position={[0.6, 2, 6]}
+                    position={[-1, 2, 6]}
                     scale={[2, 2, 2]}
                 />
             </div>
-            <div className="h-[100vh]">
-                <Portfolio />
-            </div>
+            <Intro />
+            <Portfolio />
+            <Contact
+                rotation={[Math.PI * 0.42, 0, 0]}
+                position={[0, -1.5, 0]}
+                scale={[0.6, 0.6, 0.6]}
+            />
         </div>
     )
 }
 
 function Intro() {
     return (
-        <div className="relative left-[8vw] top-[4vh]">
-            <h1 className="text-primary  md:text-[90px]">
-                <span className="text-[30px] font-normal">Hey,</span>
-                <br /> I'm Michael
-            </h1>
-            <p className="mt-8 text-[20px] text-primary">
-                Welcome to my portfolio
-            </p>
+        <div className="items-top mx-5 mb-10 flex h-[100vh] w-[100vw] flex-col gap-x-5 md:mx-20 md:h-[60vh] md:flex-row">
+            <div className="relative mb-10 w-[90vw] md:mb-0 md:w-[40vw]">
+                <div className="flex items-center gap-x-5">
+                    <img
+                        src="./images/me.jpg"
+                        alt=""
+                        className="h-40 w-40 rounded-full"
+                    />
+                    <h1 className="mb-2 text-5xl font-semibold leading-10 text-primary">
+                        About Me
+                    </h1>
+                </div>
+                <p className="mt-5 text-lg leading-6 text-primary">
+                    Bla bla bla bla Bla bla bla bla Bla bla bla bla Bla bla bla
+                    bla Bla bla bla bla Bla bla bla bla Bla bla bla bla Bla bla
+                    bla bla
+                </p>
+            </div>
+            <ol className="relative ml-0 border-l border-gray-200 md:ml-20 w-[90vw] md:w-[50vw]">
+                <TimeSlot
+                    date="2022"
+                    title="QA Automation Engineer | Shoebox Ltd."
+                    image="./images/jobs/shoebox.png"
+                    description="Worked with JS, WDIO, and Jest to develop automated test suites"
+                />
+                <TimeSlot
+                    date="2021"
+                    title="Busser | Zaks Diner"
+                    image="./images/jobs/zaks.png"
+                    description="Welcomed customers and cleaned tables"
+                />
+                <TimeSlot
+                    date="2019"
+                    title="Lifeguard | H20"
+                    image="./images/jobs/h20.png"
+                    description="Enforced pool rules, ensured a safe environment"
+                />
+            </ol>
         </div>
     )
 }
 
-function Items(props) {
-    const scaleRatio = 0.0025
-
-    const computer = useGLTF('./models/computer.glb')
-
-    const computerParts = [
-        computer.nodes.monitor_1_Material001_0,
-        computer.nodes.monitor_1_Material002_0,
-        computer.nodes.monitor_1_Material004_0,
-        computer.nodes.monitor_1_Material006_0
-    ]
-    const computerMaterial = new THREE.MeshStandardMaterial({
-        color: '#000000',
-        roughness: 0.3,
-        metalness: 0.7
-    })
-    const computerMaterial2 = new THREE.MeshBasicMaterial({ color: '#40b9d9' })
-    computerParts.forEach((part) => {
-        applyProps(part, { material: computerMaterial })
-    })
-    applyProps(computer.nodes.keyboard_1_Material001_0, {
-        material: computerMaterial2
-    })
-
+function TimeSlot(props) {
     return (
-        <>
-            <Canvas
-                flat
-                camera={{
-                    fov: 45,
-                    near: 0.1,
-                    far: 2000,
-                    position: [0, 4, 12]
-                }}
-            >
-                <Environment files="./hdrs/evening_road_01_puresky_4k.hdr" />
-                <group
-                    rotation={props.rotation}
-                    position={props.position}
-                    scale={props.scale}
-                >
-                    <Model
-                        name="boxTV"
-                        scale={[scaleRatio, scaleRatio, scaleRatio]}
-                        position={[
-                            scaleRatio * 375,
-                            scaleRatio * 95,
-                            -scaleRatio * 62.5
-                        ]}
-                    />
-                    <Model
-                        name="ps2Controller"
-                        scale={[
-                            scaleRatio * 100,
-                            scaleRatio * 100,
-                            scaleRatio * 100
-                        ]}
-                        position={[0, -scaleRatio * 80, scaleRatio * 107.5]}
-                        rotation={[-Math.PI / 3, 0, 0]}
-                    />
-                    <Model
-                        name="ps2Console"
-                        scale={[
-                            scaleRatio * 50,
-                            scaleRatio * 50,
-                            scaleRatio * 50
-                        ]}
-                        position={[
-                            scaleRatio * 12.5,
-                            -scaleRatio * 130,
-                            -scaleRatio * 12.5
-                        ]}
-                    />
-                    <Html
-                        transform
-                        wrapperClass="screen"
-                        distanceFactor={scaleRatio * 150}
-                        position={[
-                            scaleRatio * 375,
-                            scaleRatio * 95,
-                            scaleRatio * 115
-                        ]}
-                    >
-                        <img src="./images/pong.gif" />
-                    </Html>
-                </group>
-            </Canvas>
-        </>
-    )
-}
-
-function Model(props) {
-    const model = useGLTF(`./models/${props.name}.glb`)
-
-    return (
-        <>
-            <primitive
-                object={model.scene}
-                rotation={props.rotation}
-                position={props.position}
-                scale={props.scale}
-            />
-        </>
+        <li className="my-8 ml-4">
+            <div className="absolute -left-2 mt-1.5 h-4 w-4 rounded-full border bg-gradient-to-r from-creations1 to-creations2 to-60%" />
+            <time className="text-sm font-normal leading-none text-tertiary ">
+                {props.date}
+            </time>
+            <div className="my-1 flex gap-x-3">
+                <h3 className="text-lg font-semibold text-primary ">
+                    {props.title}
+                </h3>
+                <img
+                    src={props.image}
+                    alt=""
+                    className="-mt-1 h-8 w-8 rounded-full"
+                />
+            </div>
+            <p className="text-base font-normal text-primary">
+                {props.description}
+            </p>
+        </li>
     )
 }
