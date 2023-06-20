@@ -16,10 +16,10 @@ module.exports = {
                 'galaxy2': '#ff6030',
                 'app1': '#e591b3',
                 'app2': '#e07ea7',
-                'creations1': '#000000',
-                'creations2': '#00008b',
-                'shader1': '#88d1f1',
-                'shader2': '#5880a2',
+                'creations1': '#00afff',
+                'creations2': '#00ff8f',
+                'shader1': '#61f4de',
+                'shader2': '#eed991',
             }
         }
     },

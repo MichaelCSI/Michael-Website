@@ -15,6 +15,7 @@
     "@react-three/drei": "^9.70.1",
     "@react-three/fiber": "^8.13.0",
     "@react-three/postprocessing": "^2.14.9",
+    "framer-motion": "^10.12.16",
     "leva": "^0.9.34",
     "r3f-perf": "^7.1.2",
     "react": "^18.2.0",

@@ -1,5 +1,5 @@
 import { useGLTF, Float, Text } from '@react-three/drei'
-import { applyProps, useThree } from '@react-three/fiber'
+import { applyProps } from '@react-three/fiber'
 import * as THREE from 'three'
 import { Canvas } from '@react-three/fiber'
 
@@ -82,11 +82,11 @@ export default function Contact(props) {
                     </Float>
                     <Text
                         font="./fonts/OvertheRainbow-Regular.ttf"
-                        fontSize={3}
+                        fontSize={6}
                         color="#888888"
                         outlineWidth={0.01}
                         outlineColor="#111111"
-                        position={[5, -3, 0]}
+                        position={[5, -5, 0]}
                     >
                         Michael O'Sullivan
                     </Text>

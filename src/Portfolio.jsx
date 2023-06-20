@@ -11,13 +11,23 @@
 // * author:	Tatiana Gladkaya (https://sketchfab.com/tatiana_gladkaya)
 
 import Project from './Project.jsx'
+import { motion } from 'framer-motion'
 
 export default function Portfolio(props) {
     return (
         <>
-            <div className="grid h-[40vh] place-items-center">
-                <h1 className="text-8xl text-primary">Projects</h1>
-            </div>
+            <motion.h1
+                className="mt-[16rem] -mb-[10rem] grid h-[50rem] md:mb-0 md:h-[40vh] md:mt-[6rem] place-items-center bg-gradient-to-br from-creations1 from-30% to-creations2 bg-clip-text text-8xl text-transparent"
+                initial={{ opacity: 0, x: -200 }}
+                whileInView={{
+                    opacity: 1,
+                    x: 0
+                }}
+                viewport={{ once: true }}
+                transition={{ duration: 2 }}
+            >
+                Projects
+            </motion.h1>
             <Project
                 description={{
                     title: 'Three.js Galaxy',
@@ -35,7 +45,8 @@ export default function Portfolio(props) {
                     `,
                     date: 'Spring 2022'
                 }}
-                position={[0, -2, 0]}
+                position={[0, -1.5, 0]}
+                shadowY={1}
                 scale={[2.2, 2.2, 2]}
                 rotation={[-0.1, -0.3, 0]}
                 model={{
@@ -47,6 +58,57 @@ export default function Portfolio(props) {
                     rotation: [-0.256, 0, 0],
                     url: './images/portfolio/galaxy.png'
                 }}
+            />
+            <Project
+                description={{
+                    title: 'Skin Cancer Detection App',
+                    style: 'app',
+                    link: 'https://devpost.com/software/skin-cancer-detection-app-fm7ptq',
+                    linkText: 'Devpost Entry',
+                    tech: [
+                        { name: 'Java', logo: './images/logos/java.png' },
+                        {
+                            name: 'TensorFlow',
+                            logo: './images/logos/tensorflow.png'
+                        }
+                    ],
+                    description: `
+                                    The Skin Cancer Detection app was made in a group of three during a University 
+                                    Hackathon and won a prize in the healthcare section. It's an android app that rates a picture 
+                                    of skin with a probability for skin cancer. It was done by training a tensorflow model 
+                                    with skin cancer data sets and implementing the model on android via Android Studio.
+                                `,
+                    date: 'Spring 2023'
+                }}
+                position={[0.2, 0, 0]}
+                shadowY={1}
+                scale={[1.6, 1.6, 1.6]}
+                rotation={[0, -0.3, 0]}
+                model={{
+                    source: './models/phone.gltf',
+                    rotation: [-0.4, 0, 0]
+                }}
+                image={{
+                    scale: [1.38, 2.93, 1],
+                    position: [0.17, 1.35, -0.48],
+                    url: './images/portfolio/hackathonApp.jpeg',
+                    rotation: [-0.4, 0, 0]
+                }}
+                award={
+                    <div className="flex items-center gap-x-1">
+                        <img
+                            src="./images/portfolio/star.png"
+                            alt=""
+                            className="h-4 w-4 rounded-full"
+                        />
+                        <p className="text-sm text-primary">Prize Winner</p>
+                        <img
+                            src="./images/portfolio/star.png"
+                            alt=""
+                            className="h-4 w-4 rounded-full"
+                        />
+                    </div>
+                }
             />
             <Project
                 description={{
@@ -65,8 +127,9 @@ export default function Portfolio(props) {
                                 `,
                     date: 'Ongoing'
                 }}
-                position={[-2.4, 1.5, 0]}
-                scale={[2.7, 2.7, 2.7]}
+                position={[-2.2, 3, 0]}
+                shadowY={2}
+                scale={[2.2, 2.2, 2.2]}
                 model={{
                     source: './models/frame.glb',
                     position: [1, 0, 0],
@@ -74,41 +137,6 @@ export default function Portfolio(props) {
                     scale: [3, 3, 3]
                 }}
                 gallery1={true}
-            />
-            <Project
-                description={{
-                    title: 'Skin Cancer Detection App',
-                    style: 'app',
-                    link: 'https://devpost.com/software/skin-cancer-detection-app-fm7ptq',
-                    linkText: 'Devpost Entry',
-                    tech: [
-                        { name: 'Java', logo: './images/logos/java.png' },
-                        {
-                            name: 'TensorFlow',
-                            logo: './images/logos/tensorflow.png'
-                        }
-                    ],
-                    description: `
-                                    The Skin Cancer Detection app was made in a group of three during
-                                    a University Hackathon, and won a prize____. It's an android app that rates a picture of skin
-                                    with a probability for skin cancer. It was done by training a tensorflow model 
-                                    with skin cancer data sets and implementing the model on android via Android Studio.
-                                `,
-                    date: 'Spring 2023'
-                }}
-                position={[0.2, -0.8, 0]}
-                scale={[1.8, 1.8, 1.8]}
-                rotation={[0, -0.3, 0]}
-                model={{
-                    source: './models/phone.gltf',
-                    rotation: [-0.4, 0, 0]
-                }}
-                image={{
-                    scale: [1.38, 2.93, 1],
-                    position: [0.17, 1.35, -0.48],
-                    url: './images/portfolio/hackathonApp.jpeg',
-                    rotation: [-0.4, 0, 0]
-                }}
             />
             <Project
                 description={{
@@ -123,12 +151,12 @@ export default function Portfolio(props) {
                     ],
                     description: `
                                     Made a React Three (R3) ocean scene with a GLSL shader. The scene 
-                                    combines 3D models, a built in R3 shader for the stars, an R3 trail
+                                    combines 3D models, a built in R3 star shader, an R3 trail
                                     for the shooting star, and the custom shader for the ocean.
                                 `,
                     date: 'Summer 2023'
                 }}
-                position={[0, 0.4, 2]}
+                position={[0, 0, 2]}
                 model={{
                     source: './models/frame2.glb',
                     rotation: [-Math.PI / 8, 0, 0],

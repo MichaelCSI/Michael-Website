@@ -12,3 +12,9 @@ body,
     width: 100%;
     height: 100%;
 }
+
+@layer components {
+    .btn-primary {
+      @apply transition hover:-translate-y-1 duration-200 z-10 rounded-full bg-gray-50 px-4 py-1.5 text-xs font-medium text-gray-600;
+    }
+  }

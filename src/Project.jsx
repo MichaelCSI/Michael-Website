@@ -11,6 +11,7 @@ import {
 
 import { applyProps } from '@react-three/fiber'
 import { Canvas } from '@react-three/fiber'
+import { motion } from 'framer-motion'
 
 export default function Project(props) {
     // Adjust phone screen to white
@@ -20,7 +21,16 @@ export default function Project(props) {
     })
 
     return (
-        <div className="flex flex-col md:flex-row">
+        <motion.div
+            className="mx-5 flex flex-col md:mx-20 md:flex-row"
+            initial={{opacity: 0, x: -200}}
+            whileInView={{
+                opacity: 1,
+                x: 0
+            }}
+            viewport={{ once: true }}
+            transition={{ duration: 2 }}
+        >
             <Description
                 title={props.description.title}
                 style={props.description.style}
@@ -29,8 +39,9 @@ export default function Project(props) {
                 tech={props.description.tech}
                 description={props.description.description}
                 date={props.description.date}
+                award={props.award}
             />
-            <div className="h-[30vh] w-[100vw] md:h-[60vh] md:w-[40vw]">
+            <div className="my-[6rem] h-[15rem] w-[80vw] md:my-2 md:h-[60vh] md:w-[40vw]">
                 <Canvas
                     flat
                     camera={{
@@ -52,7 +63,7 @@ export default function Project(props) {
                         position={[0, 4, 6]}
                     />
                     <ContactShadows
-                        position-y={-2.5}
+                        position-y={props.shadowY ? props.shadowY - 2.5 : -2.5}
                         opacity={0.5}
                         scale={30}
                         blur={2.4}
@@ -114,7 +125,7 @@ export default function Project(props) {
                     </PresentationControls>
                 </Canvas>
             </div>
-        </div>
+        </motion.div>
     )
 }
 
@@ -190,7 +201,7 @@ function Description(props) {
     }
 
     return (
-        <div className="relative mx-4  h-[44vh] md:h-60vh w-[100vw] md:mx-10 md:w-[50vw]">
+        <div className="md:h-60vh relative h-[44vh] w-[80vw] md:mx-10 md:mb-0 md:w-[50vw]">
             <div className="group relative">
                 <h1
                     className={`${
@@ -206,10 +217,11 @@ function Description(props) {
                         target="_blank"
                         className={`${
                             style[props.style].hoverGradient
-                        } z-10 rounded-full bg-gray-50  px-4 py-1.5 text-xs font-medium text-gray-600`}
+                        } btn-primary rounded-full px-4 py-1.5 text-gray-600`}
                     >
                         {props.linkText}
                     </a>
+                    {props.award ? props.award : null}
                 </div>
                 <p className="mt-5 w-[90vw] text-sm leading-6 text-primary md:w-[40vw]">
                     {props.description}
