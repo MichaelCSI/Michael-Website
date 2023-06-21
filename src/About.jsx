@@ -7,7 +7,6 @@ import {
     ContactShadows
 } from '@react-three/drei'
 import { Canvas, useFrame } from '@react-three/fiber'
-import { motion, AnimatePresence } from 'framer-motion'
 
 // Skateboard model credits
 // * title:	Skateboard Design 2
@@ -21,7 +20,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 export default function About() {
     return (
-        <div className="items-top mx-5 mb-20 flex h-[100vh] w-[80vw] flex-col gap-x-5 md:mx-12 md:h-[70vh] md:w-[90vw] md:flex-row">
+        <div className="items-top mb-20 flex h-[100vh] w-[80vw] flex-col gap-x-5 md:h-[70vh] md:w-[100vw] md:flex-row">
             <Me />
             <Experience />
         </div>
@@ -30,16 +29,12 @@ export default function About() {
 
 function Me() {
     return (
-        <div className="relative mb-10 w-[90vw] md:mb-0 md:w-[50vw]">
+        <div className="relative mb-10 ml-5 w-[90vw] md:mb-0 md:ml-[5vw] md:w-[50vw]">
             <div className="flex items-center gap-x-5">
                 <img
                     src="./images/me.jpg"
                     alt=""
                     className="h-40 w-40 rounded-full transition duration-200 hover:scale-110"
-                    whileHover={{
-                        scale: 1.1,
-                        transition: { duration: 0.2 }
-                    }}
                 />
                 <h1 className="mb-2 bg-gradient-to-br from-creations1 from-30% to-creations2 bg-clip-text text-5xl font-semibold leading-10 text-transparent">
                     About Me
@@ -97,12 +92,12 @@ function Hobbies() {
                 <primitive
                     object={useGLTF('./models/skateboard.glb').scene}
                     ref={skateRef}
-                    position={[-7, 0, 0]}
+                    position={[-8, 0, 0]}
                     scale={[0.32, 0.32, 0.32]}
                 />
                 <primitive
                     object={useGLTF('./models/piano.glb').scene}
-                    position={[6, 1, 0]}
+                    position={[5, 1, 0]}
                     rotation={[Math.PI / 6, 0, 0]}
                     scale={[12.6, 12.6, 12.6]}
                 />
@@ -114,7 +109,7 @@ function Hobbies() {
 function Experience() {
     const [education, setEducation] = useState(false)
     return (
-        <div className="relative ml-0 w-[80vw] md:ml-40 md:w-[50vw]">
+        <div className="relative ml-5 w-[80vw] md:ml-[5vw] md:w-[36vw]">
             <div>
                 <div className="flex items-center gap-x-5">
                     <h1 className="-mb-4 mt-14 grid place-items-center bg-gradient-to-br from-creations1 from-30% to-creations2 bg-clip-text text-2xl font-semibold text-primary text-transparent md:mt-0">
@@ -151,7 +146,7 @@ function Experience() {
                                 date="2022"
                                 title="QA Automation Engineer | Shoebox Ltd."
                                 image="./images/experience/shoebox.png"
-                                description="Worked with JS, WDIO, and Jest to develop automated test suites"
+                                description="Worked with JS, WDIO, and Jest to develop automated test suites as part of the QA team"
                             />
                             <TimeSlot
                                 date="2021"

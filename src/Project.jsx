@@ -29,7 +29,7 @@ export default function Project(props) {
                 x: 0
             }}
             viewport={{ once: true }}
-            transition={{ duration: 2 }}
+            transition={{ duration: 1.5 }}
         >
             <Description
                 title={props.description.title}

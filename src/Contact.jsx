@@ -42,7 +42,7 @@ export default function Contact(props) {
     ]
 
     return (
-        <div className="h-[10vh] w-[90vw] md:h-[20vh] md:w-[100vw]">
+        <div className="h-[20vh] w-[90vw] md:mb-0 md:w-[100vw]">
             <Canvas
                 flat
                 camera={{

@@ -1,6 +1,6 @@
 import Portfolio from './Portfolio.jsx'
 import Contact from './Contact.jsx'
-import Items from './Items.jsx'
+import TopModels from './TopModels.jsx'
 import About from './About.jsx'
 import { Suspense } from 'react'
 import { Loader } from '@react-three/drei'
@@ -22,7 +22,7 @@ export default function Home() {
                 <motion.div>
 
                 </motion.div>
-                <Items
+                <TopModels
                     rotation={[0, -Math.PI / 8, 0]}
                     position={[-1, 2, 6]}
                     scale={[2, 2, 2]}
