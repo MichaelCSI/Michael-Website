@@ -17,7 +17,7 @@ export default function Portfolio(props) {
     return (
         <>
             <motion.h1
-                className="mt-[16rem] -mb-[10rem] grid h-[50rem] md:mb-0 md:h-[40vh] md:mt-[6rem] place-items-center bg-gradient-to-br from-creations1 from-30% to-creations2 bg-clip-text text-8xl text-transparent"
+                className={`mt-[16rem] -mb-[10rem] grid h-[50rem] md:mb-0 md:h-[40vh] md:mt-[6rem] place-items-center ${props.style.textGradient} bg-clip-text text-8xl text-transparent`}
                 initial={{ opacity: 0, x: -200 }}
                 whileInView={{
                     opacity: 1,

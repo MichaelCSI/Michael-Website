@@ -18,16 +18,16 @@ import { Canvas, useFrame } from '@react-three/fiber'
 // * source:	https://sketchfab.com/3d-models/four-octave-midi-keyboard-b9ce4b06980643ecbc184b865e2c6bf2
 // * author:	Ivan_WSK (https://sketchfab.com/ivan-wsk)
 
-export default function About() {
+export default function About(props) {
     return (
         <div className="items-top mb-20 flex h-[100vh] w-[80vw] flex-col gap-x-5 md:h-[70vh] md:w-[100vw] md:flex-row">
-            <Me />
-            <Experience />
+            <Me style={props.style} />
+            <Experience style={props.style} />
         </div>
     )
 }
 
-function Me() {
+function Me(props) {
     return (
         <div className="relative mb-10 ml-5 w-[90vw] md:mb-0 md:ml-[5vw] md:w-[50vw]">
             <div className="flex items-center gap-x-5">
@@ -36,7 +36,9 @@ function Me() {
                     alt=""
                     className="h-40 w-40 rounded-full transition duration-200 hover:scale-110"
                 />
-                <h1 className="mb-2 bg-gradient-to-br from-creations1 from-30% to-creations2 bg-clip-text text-5xl font-semibold leading-10 text-transparent">
+                <h1
+                    className={`mb-2 ${props.style.textGradient} bg-clip-text text-5xl font-semibold leading-10 text-transparent`}
+                >
                     About Me
                 </h1>
             </div>
@@ -106,17 +108,19 @@ function Hobbies() {
     )
 }
 
-function Experience() {
+function Experience(props) {
     const [education, setEducation] = useState(false)
     return (
         <div className="relative ml-5 w-[80vw] md:ml-[5vw] md:w-[36vw]">
             <div>
                 <div className="flex items-center gap-x-5">
-                    <h1 className="-mb-4 mt-14 grid place-items-center bg-gradient-to-br from-creations1 from-30% to-creations2 bg-clip-text text-2xl font-semibold text-primary text-transparent md:mt-0">
+                    <h1
+                        className={`-mb-4 mt-14 grid place-items-center ${props.style.textGradient} bg-clip-text text-2xl font-semibold text-primary text-transparent md:mt-0`}
+                    >
                         {education ? 'Education' : 'Work Experience'}
                     </h1>
                     <button
-                        className="btn-primary mt-16 from-creations1  from-30% to-creations2 hover:bg-gradient-to-r hover:text-primary md:mt-5"
+                        className={`btn-primary mt-16 ${props.style.hoverGradient} hover:text-primary md:mt-5`}
                         onClick={() => {
                             setEducation(!education)
                         }}
@@ -132,12 +136,14 @@ function Experience() {
                                 title="UOttawa Honours BSc Computer Science"
                                 image="./images/experience/uottawa.png"
                                 description="Dean's list, CGPA 9.6/10"
+                                style={props.style}
                             />
                             <TimeSlot
                                 date="2021 | Graduation"
                                 title="Lisgar Collegiate Institute"
                                 image="./images/experience/lisgar.jpeg"
                                 description="Honour roll, best sense of humour award nominee"
+                                style={props.style}
                             />
                         </>
                     ) : (
@@ -147,18 +153,21 @@ function Experience() {
                                 title="QA Automation Engineer | Shoebox Ltd."
                                 image="./images/experience/shoebox.png"
                                 description="Worked with JS, WDIO, and Jest to develop automated test suites as part of the QA team"
+                                style={props.style}
                             />
                             <TimeSlot
                                 date="2021"
                                 title="Busser | Zaks Diner"
                                 image="./images/experience/zaks.png"
                                 description="Welcomed customers and cleaned tables"
+                                style={props.style}
                             />
                             <TimeSlot
                                 date="2019"
                                 title="Lifeguard | H20"
                                 image="./images/experience/h20.png"
                                 description="Enforced pool rules, ensured a safe environment"
+                                style={props.style}
                             />
                         </>
                     )}
@@ -171,7 +180,9 @@ function Experience() {
 function TimeSlot(props) {
     return (
         <li className="my-8 ml-4">
-            <div className="relative -left-6 mt-1.5 h-4 w-4 rounded-full border bg-gradient-to-r from-creations1 from-60% to-creations2" />
+            <div
+                className={`relative -ml-6 mt-1.5 h-4 w-4 rounded-full border ${props.style.textGradient}`}
+            />
             <time className="text-sm font-normal leading-none text-tertiary ">
                 {props.date}
             </time>
