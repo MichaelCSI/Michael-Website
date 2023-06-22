@@ -23,7 +23,7 @@ export default function Project(props) {
     return (
         <motion.div
             className="mx-5 flex flex-col md:mx-20 md:flex-row"
-            initial={{opacity: 0, x: -200}}
+            initial={{ opacity: 0, x: -200 }}
             whileInView={{
                 opacity: 1,
                 x: 0
@@ -179,9 +179,9 @@ function Gallery2(props) {
 function Description(props) {
     const style = {
         galaxy: {
-            gradient: 'bg-gradient-to-r from-galaxy1 to-galaxy2 to-60%',
+            gradient: 'bg-gradient-to-r from-galaxy1 to-galaxy2 to-40%',
             hoverGradient:
-                'hover:bg-gradient-to-r from-galaxy1 to-galaxy2 to-90% hover:text-primary'
+                'hover:bg-gradient-to-r from-galaxy1 to-galaxy2 from-20% hover:text-primary'
         },
         app: {
             gradient: 'bg-gradient-to-r from-app1 to-app2 to-60%',
@@ -202,28 +202,28 @@ function Description(props) {
 
     return (
         <div className="md:h-60vh relative h-[44vh] w-[80vw] md:mx-10 md:mb-0 md:w-[50vw]">
-            <div className="group relative">
+            <div className="group relative text-sm leading-6 md:text-base md:leading-7">
                 <h1
                     className={`${
                         style[props.style].gradient
-                    } mb-2 bg-clip-text text-xl font-semibold leading-6 text-transparent`}
+                    } mb-2 bg-clip-text text-xl font-semibold text-transparent`}
                 >
                     {props.title}
                 </h1>
                 <div className="flex items-center gap-x-5">
-                    <p className="text-sm text-primary">{props.date}</p>
+                    <p className="text-center text-primary">{props.date}</p>
                     <a
                         href={props.link}
                         target="_blank"
                         className={`${
                             style[props.style].hoverGradient
-                        } btn-primary rounded-full px-4 py-1.5 text-gray-600`}
+                        } btn-primary rounded-full px-4 py-1.5 text-gray-600 text-center`}
                     >
                         {props.linkText}
                     </a>
                     {props.award ? props.award : null}
                 </div>
-                <p className="mt-5 w-[90vw] text-sm leading-6 text-primary md:w-[40vw]">
+                <p className="mt-5 w-[90vw] text-primary md:w-[40vw]">
                     {props.description}
                 </p>
             </div>
@@ -235,7 +235,7 @@ function Description(props) {
                             alt=""
                             className="h-8 w-8 rounded-full"
                         />
-                        <p className="text-sm text-primary">{tech.name}</p>
+                        <p className=" text-primary">{tech.name}</p>
                     </div>
                 ))}
             </div>

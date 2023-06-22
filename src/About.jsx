@@ -29,7 +29,7 @@ export default function About(props) {
 
 function Me(props) {
     return (
-        <div className="relative mb-10 ml-5 w-[90vw] md:mb-0 md:ml-[5vw] md:w-[50vw]">
+        <div className="relative mb-10 ml-5 w-[90vw] md:mb-0 md:mx-[5vw] md:w-[45vw]">
             <div className="flex items-center gap-x-5">
                 <img
                     src="./images/me.jpg"
@@ -37,12 +37,12 @@ function Me(props) {
                     className="h-40 w-40 rounded-full transition duration-200 hover:scale-110"
                 />
                 <h1
-                    className={`mb-2 ${props.style.textGradient} bg-clip-text text-5xl font-semibold leading-10 text-transparent`}
+                    className={`mb-2 ${props.style.textGradient} bg-clip-text text-5xl font-semibold leading-12 text-transparent`}
                 >
                     About Me
                 </h1>
             </div>
-            <p className="mt-5 text-lg leading-6 text-primary">
+            <p className="mt-5 text-base md:text-lg leading-6 md:leading-7 text-primary">
                 I grew up in Ottawa, Ontario and started coding in high school.
                 I did some basic web development as a hobby and after a couple
                 of high school programming courses (as well as some online
@@ -113,14 +113,14 @@ function Experience(props) {
     return (
         <div className="relative ml-5 w-[80vw] md:ml-[5vw] md:w-[36vw]">
             <div>
-                <div className="flex items-center gap-x-5">
+                <div className="flex flex-col md:flex-row items-center gap-x-5">
                     <h1
                         className={`-mb-4 mt-14 grid place-items-center ${props.style.textGradient} bg-clip-text text-2xl font-semibold text-primary text-transparent md:mt-0`}
                     >
                         {education ? 'Education' : 'Work Experience'}
                     </h1>
                     <button
-                        className={`btn-primary mt-16 ${props.style.hoverGradient} hover:text-primary md:mt-5`}
+                        className={`btn-primary ${props.style.hoverGradient} hover:text-primary mt-10 md:mt-5`}
                         onClick={() => {
                             setEducation(!education)
                         }}
@@ -132,7 +132,7 @@ function Experience(props) {
                     {education ? (
                         <>
                             <TimeSlot
-                                date="Current | 3rd Year"
+                                date="2021 - Current | 3rd Year"
                                 title="UOttawa Honours BSc Computer Science"
                                 image="./images/experience/uottawa.png"
                                 description="Dean's list, CGPA 9.6/10"
@@ -179,15 +179,15 @@ function Experience(props) {
 
 function TimeSlot(props) {
     return (
-        <li className="my-8 ml-4">
+        <li className="my-10 ml-4">
             <div
-                className={`relative -ml-6 mt-1.5 h-4 w-4 rounded-full border ${props.style.textGradient}`}
+                className={`relative -mb-5 -ml-6 h-4 w-4 rounded-full border ${props.style.textGradient}`}
             />
-            <time className="text-sm font-normal leading-none text-tertiary ">
+            <time className="text-sm md:text-base font-normal leading-none text-tertiary ">
                 {props.date}
             </time>
             <div className="my-1 flex gap-x-3">
-                <h3 className="text-lg font-semibold text-primary ">
+                <h3 className="text-base md:text-lg font-semibold text-primary ">
                     {props.title}
                 </h3>
                 <img
@@ -196,7 +196,7 @@ function TimeSlot(props) {
                     className="-mt-1 h-8 w-8 rounded-lg"
                 />
             </div>
-            <p className="text-base font-normal text-primary">
+            <p className="text-sm md:text-base font-normal leading-6 text-primary mt-2">
                 {props.description}
             </p>
         </li>

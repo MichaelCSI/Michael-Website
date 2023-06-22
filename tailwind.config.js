@@ -18,7 +18,7 @@ module.exports = {
                 'bg7': '#001306',
                 'bg8': '#01260c',
                 'bg9': '#013a12',
-                'galaxy1': '#00008b',
+                'galaxy1': '#0000d8',
                 'galaxy2': '#ff6030',
                 'app1': '#e591b3',
                 'app2': '#e07ea7',

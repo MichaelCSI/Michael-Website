@@ -13,6 +13,7 @@ export default function Home() {
 
     const style = {
         blue: {
+            type: 'light',
             backgroundGradient: 'bg-gradient-to-br from-bg1 via-bg2 to-bg3',
             textGradient:
                 'bg-gradient-to-br from-creations1 from-60% to-creations2',
@@ -20,12 +21,14 @@ export default function Home() {
                 'hover:bg-gradient-to-br from-creations1 from-60% to-creations2'
         },
         black: {
+            type: 'dark',
             backgroundGradient: 'bg-gradient-to-br from-bg4 via-bg5 to-bg6',
             textGradient: 'bg-gradient-to-br from-galaxy1 from-20% to-galaxy2',
             hoverGradient:
                 'hover:bg-gradient-to-br from-galaxy1 from-20% to-galaxy2'
         },
         green: {
+            type: 'dark',
             backgroundGradient: 'bg-gradient-to-br from-bg7 via-bg8 to-bg9',
             textGradient: 'bg-gradient-to-br from-shader1 from-20% to-shader2',
             hoverGradient:

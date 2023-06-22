@@ -17,7 +17,7 @@ export default function Portfolio(props) {
     return (
         <>
             <motion.h1
-                className={`mt-[16rem] -mb-[10rem] grid h-[50rem] md:mb-0 md:h-[40vh] md:mt-[6rem] place-items-center ${props.style.textGradient} bg-clip-text text-8xl text-transparent`}
+                className={`-mb-[10rem] mt-[26rem] grid h-[30rem] place-items-center md:mb-0 md:mt-[6rem] md:h-[40vh] ${props.style.textGradient} bg-clip-text text-6xl text-transparent md:text-8xl`}
                 initial={{ opacity: 0, x: -200 }}
                 whileInView={{
                     opacity: 1,
@@ -35,8 +35,20 @@ export default function Portfolio(props) {
                     link: 'https://threejs-practice-pi.vercel.app/',
                     linkText: 'Live Website',
                     tech: [
-                        { name: 'JavaScript', logo: './images/logos/js.png' },
-                        { name: 'Three.js', logo: './images/logos/three.png' }
+                        {
+                            name: 'JavaScript',
+                            logo:
+                                props.style.type === 'dark'
+                                    ? './images/logos/jsAlt.png'
+                                    : './images/logos/js.png'
+                        },
+                        {
+                            name: 'Three.js',
+                            logo:
+                                props.style.type === 'dark'
+                                    ? './images/logos/threeAlt.png'
+                                    : './images/logos/three.png'
+                        }
                     ],
                     description: `
                         The Three.js Galaxy is a particle-based geometry with tweakable 
@@ -66,7 +78,13 @@ export default function Portfolio(props) {
                     link: 'https://devpost.com/software/skin-cancer-detection-app-fm7ptq',
                     linkText: 'Devpost Entry',
                     tech: [
-                        { name: 'Java', logo: './images/logos/java.png' },
+                        {
+                            name: 'Java',
+                            logo:
+                                props.style.type === 'dark'
+                                    ? './images/logos/javaAlt.png'
+                                    : './images/logos/java.png'
+                        },
                         {
                             name: 'TensorFlow',
                             logo: './images/logos/tensorflow.png'
@@ -95,13 +113,13 @@ export default function Portfolio(props) {
                     rotation: [-0.4, 0, 0]
                 }}
                 award={
-                    <div className="flex items-center gap-x-1">
+                    <div className="flex items-center gap-x-1 mt-2 md:mt-0">
                         <img
                             src="./images/portfolio/star.png"
                             alt=""
                             className="h-4 w-4 rounded-full"
                         />
-                        <p className="text-sm text-primary">Prize Winner</p>
+                        <p className="text-sm md:text-base text-primary text-center">Prize Winner</p>
                         <img
                             src="./images/portfolio/star.png"
                             alt=""
@@ -145,8 +163,20 @@ export default function Portfolio(props) {
                     link: 'https://michaelcsi.github.io/Ocean-Shader/',
                     linkText: 'Live Website',
                     tech: [
-                        { name: 'JavaScript', logo: './images/logos/js.png' },
-                        { name: 'Three.js', logo: './images/logos/three.png' },
+                        {
+                            name: 'JavaScript',
+                            logo:
+                                props.style.type === 'dark'
+                                    ? './images/logos/jsAlt.png'
+                                    : './images/logos/js.png'
+                        },
+                        {
+                            name: 'Three.js',
+                            logo:
+                                props.style.type === 'dark'
+                                    ? './images/logos/threeAlt.png'
+                                    : './images/logos/threeAlt.png'
+                        },
                         { name: 'GLSL', logo: './images/logos/glsl.png' }
                     ],
                     description: `
