@@ -5,7 +5,7 @@ import TopModelsSetup from './TopModelsSetup.jsx'
 export default function TopModels(props) {
 
     return (
-        <div className="h-[40vh] w-[90vw] md:h-[60vh] md:w-[50vw]">
+        <div className="h-[40vh] w-[100vw] md:h-[60vh] md:w-[50vw]">
             <Canvas
                 flat
                 camera={{

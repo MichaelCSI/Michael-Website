@@ -36,10 +36,15 @@ import { applyProps } from '@react-three/fiber'
 // * source:	https://sketchfab.com/3d-models/tennis-ball-edc344dcc65440ea97b5eae84f1957a4
 // * author:	Tentrox (https://sketchfab.com/sudharsanme)
 
-// Headphones Credits
-// * title:	Headphones Skullcandy Crusher Wireless
-// * source:	https://sketchfab.com/3d-models/headphones-skullcandy-crusher-wireless-4e902017e4624547b440da0a6658a689
-// * author:	Ankledot (https://sketchfab.com/Ankledot)
+// Ipod Credits
+// * title:	iPod Classic
+// * source:	https://sketchfab.com/3d-models/ipod-classic-13dbe30b0e45408c8bfaddfe6a4e8786
+// * author:	Timothy Ahene (https://sketchfab.com/timothyahene)
+
+// VHS Tape Credits
+// * title:	VHS Tape
+// * source:	https://sketchfab.com/3d-models/vhs-tape-5dd97a1e26734d89b38a0fb158dc753f
+// * author:	Setsubou (https://sketchfab.com/setsubou)
 
 export default function TopModelsSetup() {
     const scaleRatio = 0.0025
@@ -57,19 +62,27 @@ export default function TopModelsSetup() {
     const minnyAnimations = useAnimations(minion.animations, minion.scene)
     minnyAnimations.actions['mixamo.com'].play()
 
+    // Main models, could not find a better way to adjust env map intensity
     const tennis = useGLTF('./models/tennis.glb')
-    applyProps(tennis.materials.lambert1, { envMapIntensity: 0.5 })
-    applyProps(tennis.materials.lambert3, { envMapIntensity: 0.5 })
+    const ipod = useGLTF('./models/ipod.glb')
+    const ps2 = useGLTF('./models/ps2Console.glb')
+    const ps2Controller = useGLTF('./models/ps2Controller.glb')
+    const tv = useGLTF('./models/boxTV.glb')
+    const vhs = useGLTF('./models/vhs.glb')
 
-    const headphones = useGLTF('./models/headphones.glb')
-    applyProps(headphones.materials.M_Skullcandy_Crusher, { envMapIntensity: 0.7 })
+    const objects = [tennis, ipod, ps2, ps2Controller, tv, vhs]
+    objects.forEach((object) => {
+        Object.values(object.materials).forEach((material) => {
+            applyProps(material, { envMapIntensity: 0.7 })
+        })
+    })
 
     return (
         <>
-            <OrbitControls />
+            {/* <OrbitControls /> */}
             <group>
                 <primitive
-                    object={useGLTF('./models/boxTV.glb').scene}
+                    object={tv.scene}
                     scale={[scaleRatio, scaleRatio, scaleRatio]}
                     position={[
                         scaleRatio * 375,
@@ -77,8 +90,8 @@ export default function TopModelsSetup() {
                         -scaleRatio * 62.5
                     ]}
                 />
-                <Html transform distanceFactor={0.3} position={[0.85, 0.14, 0]}>
-                    <div style={{ width: '1220px', height: '970px' }}>
+                <Html transform distanceFactor={0.3} position={[0.878, 0.165, 0]}>
+                    <div style={{ width: '1234px', height: '980px' }}>
                         <img
                             src="./images/pong.gif"
                             style={{
@@ -93,7 +106,7 @@ export default function TopModelsSetup() {
             </group>
             <group position={[0, 0, 0.5]} rotation={[-0.1, Math.PI / 5, 0]}>
                 <primitive
-                    object={useGLTF('./models/ps2Controller.glb').scene}
+                    object={ps2Controller.scene}
                     scale={[
                         scaleRatio * 100,
                         scaleRatio * 100,
@@ -103,7 +116,7 @@ export default function TopModelsSetup() {
                     rotation={[-Math.PI / 3, 0, 0]}
                 />
                 <primitive
-                    object={useGLTF('./models/ps2Console.glb').scene}
+                    object={ps2.scene}
                     scale={[scaleRatio * 50, scaleRatio * 50, scaleRatio * 50]}
                     position={[
                         scaleRatio * 12.5,
@@ -127,22 +140,32 @@ export default function TopModelsSetup() {
                 />
                 <group rotation={[0, Math.PI / 8, 0]}>
                     <primitive
-                        object={headphones.scene}
+                        object={ipod.scene}
                         scale={[
-                            scaleRatio * 0.2,
-                            scaleRatio * 0.2,
-                            scaleRatio * 0.2
+                            scaleRatio * 500,
+                            scaleRatio * 550,
+                            scaleRatio * 500
                         ]}
                         position={[
-                            -scaleRatio * 35,
-                            -scaleRatio * 22,
-                            -scaleRatio * 16
+                            -scaleRatio * 60,
+                            -scaleRatio * 50,
+                            -scaleRatio * 40
                         ]}
-                        rotation={[
-                            Math.PI / 2 - 0.08,
-                            -0.15,
-                            (-2 * Math.PI) / 3
+                        rotation={[0, Math.PI * 1.3, Math.PI / 2]}
+                    />
+                    <primitive
+                        object={vhs.scene}
+                        scale={[
+                            scaleRatio * 1000,
+                            scaleRatio * 1000,
+                            scaleRatio * 1000
                         ]}
+                        position={[
+                            scaleRatio * 10,
+                            -scaleRatio * 56,
+                            -scaleRatio * 80
+                        ]}
+                        rotation={[-Math.PI / 2, 0, -Math.PI / 3]}
                     />
                 </group>
             </group>
