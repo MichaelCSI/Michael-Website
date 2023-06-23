@@ -50,7 +50,7 @@ function Me(props) {
                 the University of Ottawa. Aside from coding, I like to skate,
                 play video games, and practice the piano.
             </p>
-            <div className="mt-6 flex h-[18vh] w-[100vw] gap-x-6 md:h-[30vh] md:w-auto">
+            <div className="mt-6 h-[18vh] md:h-[30vh]">
                 <Canvas
                     flat
                     camera={{
