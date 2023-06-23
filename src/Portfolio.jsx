@@ -17,7 +17,7 @@ export default function Portfolio(props) {
     return (
         <>
             <motion.h1
-                className={`-mb-[10rem] mt-[26rem] grid h-[30rem] place-items-center md:mb-0 md:mt-[6rem] md:h-[40vh] ${props.style.textGradient} bg-clip-text text-6xl text-transparent md:text-8xl`}
+                className={`-mb-[10rem] mt-[25rem] grid h-[30rem] place-items-center md:mb-0 md:mt-[6rem] md:h-[40vh] ${props.style.textGradient} bg-clip-text text-6xl text-transparent md:text-8xl`}
                 initial={{ opacity: 0, x: -200 }}
                 whileInView={{
                     opacity: 1,
@@ -113,7 +113,7 @@ export default function Portfolio(props) {
                     rotation: [-0.4, 0, 0]
                 }}
                 award={
-                    <div className="flex items-center gap-x-1 mt-2 md:mt-0">
+                    <div className="flex items-center gap-x-1 mt-2 md:mt-0 h-[10vh]">
                         <img
                             src="./images/portfolio/star.png"
                             alt=""
@@ -128,6 +128,7 @@ export default function Portfolio(props) {
                     </div>
                 }
             />
+            <div className='h-[20vh]'/>
             <Project
                 description={{
                     title: 'Unity and Blender Creations',

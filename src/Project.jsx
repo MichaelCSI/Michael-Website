@@ -13,6 +13,21 @@ import { applyProps } from '@react-three/fiber'
 import { Canvas } from '@react-three/fiber'
 import { motion } from 'framer-motion'
 
+const isMobileDevice = () => {
+    const toMatch = [
+        /Android/i,
+        /webOS/i,
+        /iPhone/i,
+        /iPad/i,
+        /iPod/i,
+        /BlackBerry/i,
+        /Windows Phone/i
+    ]
+
+    return toMatch.some((toMatchItem) => {
+        return navigator.userAgent.match(toMatchItem)
+    })
+}
 export default function Project(props) {
     // Adjust phone screen to white
     const phone = useGLTF('./models/phone.gltf')
@@ -22,7 +37,7 @@ export default function Project(props) {
 
     return (
         <motion.div
-            className="mx-5 flex flex-col md:mx-20 md:flex-row"
+            className="mx-5 mb-10 flex flex-col md:mx-20 md:flex-row md:mb-0"
             initial={{ opacity: 0, x: -200 }}
             whileInView={{
                 opacity: 1,
@@ -41,90 +56,101 @@ export default function Project(props) {
                 date={props.description.date}
                 award={props.award}
             />
-            <div className="my-[6rem] h-[15rem] w-[80vw] md:my-2 md:h-[60vh] md:w-[40vw]">
-                <Canvas
-                    flat
-                    camera={{
-                        fov: 45,
-                        near: 0.1,
-                        far: 2000,
-                        position: [0, 4, 12]
-                    }}
-                    style={{ touchAction: 'none' }}
-                >
-                    {/* <OrbitControls /> */}
-                    <Environment files="./hdrs/evening_road_01_puresky_4k.hdr" />
-                    <rectAreaLight
-                        width={2.5}
-                        height={1.65}
-                        intensity={30}
-                        color={'#ff6900'}
-                        rotation={[-1, 0, 0]}
-                        position={[0, 4, 6]}
-                    />
-                    <ContactShadows
-                        position-y={props.shadowY ? props.shadowY - 2.5 : -2.5}
-                        opacity={0.5}
-                        scale={30}
-                        blur={2.4}
-                    />
-                    <PresentationControls
-                        global
-                        rotation={[0.13, 0.1, 0]}
-                        polar={[-0.1, 0.1]}
-                        azimuth={[-0.3, 0.3]}
-                        config={{ mass: 2, tension: 400 }}
-                        snap={{ mass: 4, tension: 400 }}
+            {!isMobileDevice() ? (
+                <div className="my-[6rem] h-[15rem] w-[80vw] md:my-2 md:h-[60vh] md:w-[40vw]">
+                    <Canvas
+                        flat
+                        camera={{
+                            fov: 45,
+                            near: 0.1,
+                            far: 2000,
+                            position: [0, 4, 12]
+                        }}
+                        style={{ touchAction: 'none' }}
                     >
-                        <Float
-                            rotationIntensity={0.3}
-                            speed={2}
-                            floatIntensity={2}
+                        {/* <OrbitControls /> */}
+                        <Environment files="./hdrs/evening_road_01_puresky_4k.hdr" />
+                        <rectAreaLight
+                            width={2.5}
+                            height={1.65}
+                            intensity={30}
+                            color={'#ff6900'}
+                            rotation={[-1, 0, 0]}
+                            position={[0, 4, 6]}
+                        />
+                        <ContactShadows
+                            position-y={
+                                props.shadowY ? props.shadowY - 2.5 : -2.5
+                            }
+                            opacity={0.5}
+                            scale={30}
+                            blur={2.4}
+                        />
+                        <PresentationControls
+                            global
+                            rotation={[0.13, 0.1, 0]}
+                            polar={[-0.1, 0.1]}
+                            azimuth={[-0.3, 0.3]}
+                            config={{ mass: 2, tension: 400 }}
+                            snap={{ mass: 4, tension: 400 }}
                         >
-                            <group
-                                position={props.position}
-                                scale={props.scale}
-                                rotation={props.rotation}
+                            <Float
+                                rotationIntensity={0.3}
+                                speed={2}
+                                floatIntensity={2}
                             >
-                                <primitive
-                                    object={useGLTF(props.model.source).scene}
-                                    position={props.model.position}
-                                    rotation={props.model.rotation}
-                                    scale={props.model.scale}
-                                />
-
-                                {props.image ? (
-                                    <Image
-                                        scale={props.image.scale}
-                                        position={props.image.position}
-                                        rotation={props.image.rotation}
-                                        url={props.image.url}
-                                    />
-                                ) : null}
-                                {props.title ? (
-                                    <LinkText
-                                        media={props.title.media}
-                                        text={props.title.text}
-                                        fontSize={props.title.fontSize}
-                                        textPrimary={props.title.primaryColor}
-                                        textSecondary={
-                                            props.title.secondaryColor
+                                <group
+                                    position={props.position}
+                                    scale={props.scale}
+                                    rotation={props.rotation}
+                                >
+                                    <primitive
+                                        object={
+                                            useGLTF(props.model.source).scene
                                         }
-                                        position={props.title.position}
-                                        ySpacing={props.title.ySpacing}
+                                        position={props.model.position}
+                                        rotation={props.model.rotation}
+                                        scale={props.model.scale}
                                     />
-                                ) : null}
-                                {props.gallery1 ? (
-                                    <Gallery1 rotation={props.model.rotation} />
-                                ) : null}
-                                {props.gallery2 ? (
-                                    <Gallery2 rotation={props.model.rotation} />
-                                ) : null}
-                            </group>
-                        </Float>
-                    </PresentationControls>
-                </Canvas>
-            </div>
+                                    {props.image ? (
+                                        <Image
+                                            scale={props.image.scale}
+                                            position={props.image.position}
+                                            rotation={props.image.rotation}
+                                            url={props.image.url}
+                                        />
+                                    ) : null}
+                                    {props.title ? (
+                                        <LinkText
+                                            media={props.title.media}
+                                            text={props.title.text}
+                                            fontSize={props.title.fontSize}
+                                            textPrimary={
+                                                props.title.primaryColor
+                                            }
+                                            textSecondary={
+                                                props.title.secondaryColor
+                                            }
+                                            position={props.title.position}
+                                            ySpacing={props.title.ySpacing}
+                                        />
+                                    ) : null}
+                                    {props.gallery1 ? (
+                                        <Gallery1
+                                            rotation={props.model.rotation}
+                                        />
+                                    ) : null}
+                                    {props.gallery2 ? (
+                                        <Gallery2
+                                            rotation={props.model.rotation}
+                                        />
+                                    ) : null}
+                                </group>
+                            </Float>
+                        </PresentationControls>
+                    </Canvas>
+                </div>
+            ) : null}
         </motion.div>
     )
 }
@@ -201,7 +227,7 @@ function Description(props) {
     }
 
     return (
-        <div className="md:h-60vh relative h-[44vh] w-[80vw] md:mx-10 md:mb-0 md:w-[50vw]">
+        <div className="relative h-[44vh] w-[80vw] md:mx-10 md:mb-0 md:h-[60vh] md:w-[50vw]">
             <div className="group relative text-sm leading-6 md:text-base md:leading-7">
                 <h1
                     className={`${
@@ -217,7 +243,7 @@ function Description(props) {
                         target="_blank"
                         className={`${
                             style[props.style].hoverGradient
-                        } btn-primary rounded-full px-4 py-1.5 text-gray-600 text-center`}
+                        } btn-primary rounded-full px-4 py-1.5 text-center text-gray-600`}
                     >
                         {props.linkText}
                     </a>

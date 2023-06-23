@@ -8,6 +8,22 @@ import { motion } from 'framer-motion'
 
 // Pong gif source: https://henrikostergaard.com/home
 
+const isMobileDevice = () => {
+    const toMatch = [
+        /Android/i,
+        /webOS/i,
+        /iPhone/i,
+        /iPad/i,
+        /iPod/i,
+        /BlackBerry/i,
+        /Windows Phone/i
+    ]
+
+    return toMatch.some((toMatchItem) => {
+        return navigator.userAgent.match(toMatchItem)
+    })
+}
+
 export default function Home() {
     const [currentStyle, setCurrentStyle] = useState('black')
 
@@ -55,30 +71,17 @@ export default function Home() {
                 >
                     <h1 className="mr-1 mt-1 text-xl">Color Palette</h1>
                 </div>
-                <button
-                    className={`relative mt-1.5 h-6 w-6 rounded-full border ${style.blue.textGradient} transition duration-100 hover:scale-125`}
-                    onClick={() => {
-                        setCurrentStyle('blue')
-                    }}
-                >
-                    {currentStyle === 'blue' ? <Arrow /> : null}
-                </button>
-                <button
-                    className={`relative mt-1.5 h-6 w-6 rounded-full border ${style.black.textGradient} transition duration-100 hover:scale-125`}
-                    onClick={() => {
-                        setCurrentStyle('black')
-                    }}
-                >
-                    {currentStyle === 'black' ? <Arrow /> : null}
-                </button>
-                <button
-                    className={`relative mt-1.5 h-6 w-6 rounded-full border ${style.green.textGradient} transition duration-100 hover:scale-125`}
-                    onClick={() => {
-                        setCurrentStyle('green')
-                    }}
-                >
-                    {currentStyle === 'green' ? <Arrow /> : null}
-                </button>
+                {['blue', 'black', 'green'].map((color) => (
+                    <button
+                        key={"Button "+color}
+                        className={`relative mt-1.5 h-6 w-6 rounded-full border ${style[color].textGradient} transition duration-100 hover:scale-125`}
+                        onClick={() => {
+                            setCurrentStyle(color)
+                        }}
+                    >
+                        {currentStyle === color ? <Arrow /> : null}
+                    </button>
+                ))}
             </div>
             <div className="relative flex flex-col md:flex-row">
                 <div
@@ -86,15 +89,17 @@ export default function Home() {
                 >
                     <p className="mb-1 ml-1 mt-20 text-4xl">Hey,</p>
                     <h1 className="text-6xl md:text-8xl">I'm Michael</h1>
-                    <p className="ml-1 mt-8 text-3xl">
+                    <p className="ml-1 mt-8 text-3xl mb-10 md:mb-0">
                         Welcome to my portfolio
                     </p>
                 </div>
-                <TopModels
-                    rotation={[0, -Math.PI / 8, 0]}
-                    position={[-1, 2.3, 6]}
-                    scale={[2.4, 2.4, 2.4]}
-                />
+                {!isMobileDevice() ? (
+                    <TopModels
+                        rotation={[0, -Math.PI / 8, 0]}
+                        position={[-1, 2.3, 6]}
+                        scale={[2.4, 2.4, 2.4]}
+                    />
+                ) : null}
             </div>
             <Suspense fallback={null}>
                 <About style={style[currentStyle]} />
