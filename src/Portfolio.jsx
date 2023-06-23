@@ -76,7 +76,7 @@ export default function Portfolio(props) {
                     title: 'Skin Cancer Detection App',
                     style: 'app',
                     link: 'https://devpost.com/software/skin-cancer-detection-app-fm7ptq',
-                    linkText: 'Devpost Entry',
+                    linkText: 'Devpost',
                     tech: [
                         {
                             name: 'Java',
@@ -113,7 +113,7 @@ export default function Portfolio(props) {
                     rotation: [-0.4, 0, 0]
                 }}
                 award={
-                    <div className="flex items-center gap-x-1 mt-2 md:mt-0 h-[10vh]">
+                    <div className="flex items-center gap-x-1 mt-2 md:mt-0 ">
                         <img
                             src="./images/portfolio/star.png"
                             alt=""

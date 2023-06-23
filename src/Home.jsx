@@ -73,7 +73,7 @@ export default function Home() {
                 </div>
                 {['blue', 'black', 'green'].map((color) => (
                     <button
-                        key={"Button "+color}
+                        key={'Button ' + color}
                         className={`relative mt-1.5 h-6 w-6 rounded-full border ${style[color].textGradient} transition duration-100 hover:scale-125`}
                         onClick={() => {
                             setCurrentStyle(color)
@@ -89,7 +89,7 @@ export default function Home() {
                 >
                     <p className="mb-1 ml-1 mt-20 text-4xl">Hey,</p>
                     <h1 className="text-6xl md:text-8xl">I'm Michael</h1>
-                    <p className="ml-1 mt-8 text-3xl mb-10 md:mb-0">
+                    <p className="mb-10 ml-1 mt-8 text-3xl md:mb-0">
                         Welcome to my portfolio
                     </p>
                 </div>

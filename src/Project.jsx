@@ -227,7 +227,7 @@ function Description(props) {
     }
 
     return (
-        <div className="relative h-[44vh] w-[80vw] md:mx-10 md:mb-0 md:h-[60vh] md:w-[50vw]">
+        <div className="relative h-[44vh] w-[80vw] md:mx-10 md:h-[60vh] md:w-[50vw]">
             <div className="group relative text-sm leading-6 md:text-base md:leading-7">
                 <h1
                     className={`${
