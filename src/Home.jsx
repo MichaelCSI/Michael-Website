@@ -4,7 +4,7 @@ import TopModels from './TopModels.jsx'
 import About from './About.jsx'
 import { useState, Suspense } from 'react'
 import { Loader } from '@react-three/drei'
-import { motion } from 'framer-motion'
+
 
 // Pong gif source: https://henrikostergaard.com/home
 
@@ -110,7 +110,6 @@ export default function Home() {
                     scale={[0.3, 0.3, 0.3]}
                 />
             </Suspense>
-
             <Loader
                 innerStyles={{
                     width: '200px',
