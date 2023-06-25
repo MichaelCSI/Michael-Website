@@ -64,13 +64,13 @@ export default function TopModelsSetup() {
 
     // Main models, could not find a better way to adjust env map intensity
     const tennis = useGLTF('./models/tennis.glb')
-    const ipod = useGLTF('./models/ipod.glb')
+    // const ipod = useGLTF('./models/ipod.glb')
     const ps2 = useGLTF('./models/ps2Console.glb')
     const ps2Controller = useGLTF('./models/ps2Controller.glb')
     const tv = useGLTF('./models/boxTV.glb')
     const vhs = useGLTF('./models/vhs.glb')
 
-    const objects = [tennis, ipod, ps2, ps2Controller, tv, vhs]
+    const objects = [tennis, ps2, ps2Controller, tv, vhs]
     objects.forEach((object) => {
         Object.values(object.materials).forEach((material) => {
             applyProps(material, { envMapIntensity: 0.7 })
@@ -139,7 +139,7 @@ export default function TopModelsSetup() {
                     rotation={[1, 1, 0]}
                 />
                 <group rotation={[0, Math.PI / 8, 0]}>
-                    <primitive
+                    {/* <primitive
                         object={ipod.scene}
                         scale={[
                             scaleRatio * 500,
@@ -152,7 +152,7 @@ export default function TopModelsSetup() {
                             -scaleRatio * 40
                         ]}
                         rotation={[0, Math.PI * 1.3, Math.PI / 2]}
-                    />
+                    /> */}
                     <primitive
                         object={vhs.scene}
                         scale={[

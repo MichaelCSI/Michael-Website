@@ -30,7 +30,7 @@ const isMobileDevice = () => {
 }
 export default function Project(props) {
     // Adjust phone screen to white
-    const phone = useGLTF('./models/phone.gltf')
+    const phone = useGLTF('./models/phone.glb')
     applyProps(phone.nodes.SCREEN, {
         material: new THREE.MeshBasicMaterial({ color: '#ffffff' })
     })

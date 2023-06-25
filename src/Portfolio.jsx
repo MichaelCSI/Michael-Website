@@ -62,7 +62,7 @@ export default function Portfolio(props) {
                 scale={[2.2, 2.2, 2]}
                 rotation={[-0.1, -0.3, 0]}
                 model={{
-                    source: './models/laptop.gltf'
+                    source: './models/laptop.glb'
                 }}
                 image={{
                     scale: [3, 2, 1],
@@ -103,7 +103,7 @@ export default function Portfolio(props) {
                 scale={[1.6, 1.6, 1.6]}
                 rotation={[0, -0.3, 0]}
                 model={{
-                    source: './models/phone.gltf',
+                    source: './models/phone.glb',
                     rotation: [-0.4, 0, 0]
                 }}
                 image={{
@@ -128,7 +128,7 @@ export default function Portfolio(props) {
                     </div>
                 }
             />
-            <div className='h-[20vh]'/>
+            <div className='h-[14vh]'/>
             <Project
                 description={{
                     title: 'Unity and Blender Creations',
