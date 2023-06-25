@@ -62,7 +62,6 @@ export default function TopModelsSetup() {
     const minnyAnimations = useAnimations(minion.animations, minion.scene)
     minnyAnimations.actions['mixamo.com'].play()
 
-    // Main models, could not find a better way to adjust env map intensity
     const tennis = useGLTF('./models/tennis.glb')
     const ipod = useGLTF('./models/ipod.glb')
     const ps2 = useGLTF('./models/ps2Console.glb')
@@ -70,12 +69,13 @@ export default function TopModelsSetup() {
     const tv = useGLTF('./models/boxTV.glb')
     const vhs = useGLTF('./models/vhs.glb')
 
-    const objects = [tennis, ipod, ps2, ps2Controller, tv, vhs]
-    objects.forEach((object) => {
-        Object.values(object.materials).forEach((material) => {
-            applyProps(material, { envMapIntensity: 0.7 })
-        })
-    })
+    // Main models, could not find a better way to adjust env map intensity
+    // const objects = [tennis, ipod, ps2, ps2Controller, tv, vhs]
+    // objects.forEach((object) => {
+    //     Object.values(object.materials).forEach((material) => {
+    //         applyProps(material, { envMapIntensity: 0.7 })
+    //     })
+    // })
 
     return (
         <>
@@ -90,7 +90,11 @@ export default function TopModelsSetup() {
                         -scaleRatio * 62.5
                     ]}
                 />
-                <Html transform distanceFactor={0.3} position={[0.878, 0.165, 0]}>
+                <Html
+                    transform
+                    distanceFactor={0.3}
+                    position={[0.878, 0.165, 0]}
+                >
                     <div style={{ width: '1234px', height: '980px' }}>
                         <img
                             src="./images/pong.gif"

@@ -57,7 +57,7 @@ export default function Portfolio(props) {
                     `,
                     date: 'Spring 2022'
                 }}
-                position={[0, -1.5, 0]}
+                position={[0, -1.6, 0]}
                 shadowY={1}
                 scale={[2.2, 2.2, 2]}
                 rotation={[-0.1, -0.3, 0]}
@@ -98,7 +98,7 @@ export default function Portfolio(props) {
                                 `,
                     date: 'Spring 2023'
                 }}
-                position={[0.2, 0, 0]}
+                position={[0.2, -0.1, 0]}
                 shadowY={1}
                 scale={[1.6, 1.6, 1.6]}
                 rotation={[0, -0.3, 0]}

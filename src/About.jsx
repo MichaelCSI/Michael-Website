@@ -6,7 +6,7 @@ import {
     Float,
     ContactShadows
 } from '@react-three/drei'
-import { Canvas, useFrame } from '@react-three/fiber'
+import { Canvas, useFrame, applyProps } from '@react-three/fiber'
 
 // Skateboard model credits
 // * title:	Skateboard Design 2
@@ -29,7 +29,7 @@ export default function About(props) {
 
 function Me(props) {
     return (
-        <div className="relative mb-10 ml-5 w-[90vw] md:mb-0 md:mx-[5vw] md:w-[45vw]">
+        <div className="relative mb-10 ml-5 w-[90vw] md:mx-[5vw] md:mb-0 md:w-[45vw]">
             <div className="flex items-center gap-x-5">
                 <img
                     src="./images/me.jpg"
@@ -37,12 +37,12 @@ function Me(props) {
                     className="h-40 w-40 rounded-full transition duration-200 hover:scale-110"
                 />
                 <h1
-                    className={`mb-2 ${props.style.textGradient} bg-clip-text text-5xl font-semibold leading-12 text-transparent`}
+                    className={`mb-2 ${props.style.textGradient} leading-12 bg-clip-text text-5xl font-semibold text-transparent`}
                 >
                     About Me
                 </h1>
             </div>
-            <p className="mt-5 text-base md:text-lg leading-6 md:leading-7 text-primary">
+            <p className="mt-5 text-base leading-6 text-primary md:text-lg md:leading-7">
                 I grew up in Ottawa, Ontario and started coding in high school.
                 I did some basic web development as a hobby and after a couple
                 of high school programming courses (as well as some online
@@ -73,6 +73,9 @@ function Hobbies() {
     const animations = useAnimations(piano.animations, piano.scene)
     animations.actions['Take 001'].play()
 
+    const skateboard = useGLTF('./models/skateboard.glb')
+    applyProps(skateboard.materials['all_texture_PBS'], { roughness: 1.5 })
+
     const skateRef = useRef()
     useFrame((state) => {
         const time = state.clock.elapsedTime
@@ -83,7 +86,15 @@ function Hobbies() {
 
     return (
         <>
-            <Environment files="./hdrs/evening_road_01_puresky_4k.hdr" />
+            <Environment preset="sunset" />
+            <rectAreaLight
+                    width={3}
+                    height={3}
+                    intensity={40}
+                    color={'#ff6900'}
+                    rotation={[0, -Math.PI / 2, 0]}
+                    position={[-1, 7, 0]}
+                /> 
             <ContactShadows
                 position-y={-2.5}
                 opacity={0.5}
@@ -113,14 +124,14 @@ function Experience(props) {
     return (
         <div className="relative ml-5 w-[80vw] md:ml-[5vw] md:w-[36vw]">
             <div>
-                <div className="flex flex-col md:flex-row items-center gap-x-5">
+                <div className="flex flex-col items-center gap-x-5 md:flex-row">
                     <h1
                         className={`-mb-4 mt-14 grid place-items-center ${props.style.textGradient} bg-clip-text text-2xl font-semibold text-primary text-transparent md:mt-0`}
                     >
                         {education ? 'Education' : 'Work Experience'}
                     </h1>
                     <button
-                        className={`btn-primary ${props.style.hoverGradient} hover:text-primary mt-10 md:mt-5`}
+                        className={`btn-primary ${props.style.hoverGradient} mt-10 hover:text-primary md:mt-5`}
                         onClick={() => {
                             setEducation(!education)
                         }}
@@ -183,11 +194,11 @@ function TimeSlot(props) {
             <div
                 className={`relative -mb-5 -ml-6 h-4 w-4 rounded-full border ${props.style.textGradient}`}
             />
-            <time className="text-sm md:text-base font-normal leading-none text-tertiary ">
+            <time className="text-sm font-normal leading-none text-tertiary md:text-base ">
                 {props.date}
             </time>
             <div className="my-1 flex gap-x-3">
-                <h3 className="text-base md:text-lg font-semibold text-primary ">
+                <h3 className="text-base font-semibold text-primary md:text-lg ">
                     {props.title}
                 </h3>
                 <img
@@ -196,7 +207,7 @@ function TimeSlot(props) {
                     className="-mt-1 h-8 w-8 rounded-lg"
                 />
             </div>
-            <p className="text-sm md:text-base font-normal leading-6 text-primary mt-2">
+            <p className="mt-2 text-sm font-normal leading-6 text-primary md:text-base">
                 {props.description}
             </p>
         </li>

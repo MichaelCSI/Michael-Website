@@ -37,7 +37,7 @@ export default function Project(props) {
 
     return (
         <motion.div
-            className="mx-5 mb-10 flex flex-col md:mx-20 md:flex-row md:mb-0"
+            className="mx-5 mb-10 flex flex-col md:mx-20 md:mb-0 md:flex-row"
             initial={{ opacity: 0, x: -200 }}
             whileInView={{
                 opacity: 1,
@@ -69,7 +69,7 @@ export default function Project(props) {
                         style={{ touchAction: 'none' }}
                     >
                         {/* <OrbitControls /> */}
-                        <Environment files="./hdrs/evening_road_01_puresky_4k.hdr" />
+                        <Environment preset="city" />
                         <rectAreaLight
                             width={2.5}
                             height={1.65}

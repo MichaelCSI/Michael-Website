@@ -1,9 +1,8 @@
-import { Environment } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
 import TopModelsSetup from './TopModelsSetup.jsx'
+import { Environment } from '@react-three/drei'
 
 export default function TopModels(props) {
-
     return (
         <div className="h-[40vh] w-[100vw] md:h-[60vh] md:w-[50vw]">
             <Canvas
@@ -15,7 +14,15 @@ export default function TopModels(props) {
                     position: [0, 4, 12]
                 }}
             >
-                <Environment files="./hdrs/evening_road_01_puresky_4k.hdr" />
+                <rectAreaLight
+                    width={3}
+                    height={3}
+                    intensity={10}
+                    color={'#ff6900'}
+                    rotation={[-2, -Math.PI / 2, 0]}
+                    position={[-3, 4, 10]}
+                /> 
+                <Environment preset='forest'/>
                 <group
                     rotation={props.rotation}
                     position={props.position}
