@@ -1,5 +1,10 @@
 // Laptop and phone models are from https://market.pmnd.rs/
 
+// Clapperboard model credits:
+// * title:	clapperboard
+// * source:	https://sketchfab.com/3d-models/clapperboard-1bf0c9ec243c457fafff7850aa4e696f
+// * author:	clon6767 (https://sketchfab.com/clon6767)
+
 // Picture frame 1 model credits:
 // title:	Framed picture | Картина в рамке
 // * source:	https://sketchfab.com/3d-models/framed-picture-059ed0991ee84e53af0d40647413b04b
@@ -113,13 +118,15 @@ export default function Portfolio(props) {
                     rotation: [-0.4, 0, 0]
                 }}
                 award={
-                    <div className="flex items-center gap-x-1 mt-2 md:mt-0 ">
+                    <div className="mt-2 flex items-center gap-x-1 md:mt-0 ">
                         <img
                             src="./images/portfolio/star.png"
                             alt=""
                             className="h-4 w-4 rounded-full"
                         />
-                        <p className="text-sm md:text-base text-primary text-center">Prize Winner</p>
+                        <p className="text-center text-sm text-primary md:text-base">
+                            Prize Winner
+                        </p>
                         <img
                             src="./images/portfolio/star.png"
                             alt=""
@@ -128,7 +135,46 @@ export default function Portfolio(props) {
                     </div>
                 }
             />
-            <div className='h-[14vh]'/>
+            <div className="h-[10vh]" />
+            <Project
+                description={{
+                    title: 'Showtime (live movie site)',
+                    style: 'showtime',
+                    link: 'https://michaelcsi.github.io/Showtime/',
+                    linkText: 'Live Website',
+                    tech: [
+                        {
+                            name: 'JavaScript',
+                            logo:
+                                props.style.type === 'dark'
+                                    ? './images/logos/jsAlt.png'
+                                    : './images/logos/js.png'
+                        },
+                        {
+                            name: 'Node + Express.js',
+                            logo: './images/logos/node.png'
+                        },
+                        {
+                            name: 'Socket.io',
+                            logo: './images/logos/socket.png'
+                        }
+                    ],
+                    description: `
+                                    Showtime is a movie website for watching public domain movies live.
+                                    Movies go live on a regular schedule and new movies can be requested via email. 
+                                    Each movie has its own chat room that uses Socket.io with Express.js for messaging.
+                                `,
+                    date: 'Summer 2023'
+                }}
+                position={[0.2, -0.1, 0]}
+                shadowY={1}
+                scale={[0.2, 0.2, 0.2]}
+                rotation={[0, -0.3, 0]}
+                model={{
+                    source: './models/clapperboard.glb',
+                    rotation: [-0.4, 0, 0]
+                }}
+            />
             <Project
                 description={{
                     title: 'Unity and Blender Creations',

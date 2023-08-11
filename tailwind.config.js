@@ -26,6 +26,8 @@ module.exports = {
                 'creations2': '#00ff8f',
                 'shader1': '#61f4de',
                 'shader2': '#eed991',
+                'showtime1': '#38bdf8',
+                'showtime2': '#bae6fd'
             }
         }
     },

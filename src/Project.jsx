@@ -223,6 +223,11 @@ function Description(props) {
             gradient: 'bg-gradient-to-r from-shader1 to-shader2 to-60%',
             hoverGradient:
                 'hover:bg-gradient-to-r from-shader1 to-shader2 to-70% hover:text-primary'
+        },
+        showtime: {
+            gradient: 'bg-gradient-to-r from-showtime1 to-showtime2 to-60%',
+            hoverGradient:
+                'hover:bg-gradient-to-r from-showtime1 to-showtime2 to-70% hover:text-primary'
         }
     }
 
