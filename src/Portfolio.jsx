@@ -144,15 +144,13 @@ export default function Portfolio(props) {
                     linkText: 'Live Website',
                     tech: [
                         {
-                            name: 'JavaScript',
-                            logo:
-                                props.style.type === 'dark'
-                                    ? './images/logos/jsAlt.png'
-                                    : './images/logos/js.png'
+                            name: 'React',
+                            logo: './images/logos/react.png'
+                                
                         },
                         {
-                            name: 'Node + Express.js',
-                            logo: './images/logos/node.png'
+                            name: 'TailwindCSS',
+                            logo: './images/logos/tailwind.webp'
                         },
                         {
                             name: 'Socket.io',
