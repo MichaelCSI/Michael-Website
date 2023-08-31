@@ -27,7 +27,9 @@ module.exports = {
                 'shader1': '#61f4de',
                 'shader2': '#eed991',
                 'showtime1': '#38bdf8',
-                'showtime2': '#bae6fd'
+                'showtime2': '#bae6fd',
+                'sumit1': '#63e5ff',
+                'sumit2': '#90ee90',
             }
         }
     },

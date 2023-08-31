@@ -228,6 +228,11 @@ function Description(props) {
             gradient: 'bg-gradient-to-r from-showtime1 to-showtime2 to-60%',
             hoverGradient:
                 'hover:bg-gradient-to-r from-showtime1 to-showtime2 to-70% hover:text-primary'
+        },
+        sumit: {
+            gradient: 'bg-gradient-to-r from-sumit1 to-sumit2 to-60%',
+            hoverGradient:
+                'hover:bg-gradient-to-r from-sumit1 to-sumit2 to-70% hover:text-primary'
         }
     }
 

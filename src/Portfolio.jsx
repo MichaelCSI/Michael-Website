@@ -15,6 +15,11 @@
 // * source:	https://sketchfab.com/3d-models/pictures-2656b711625f486b839a7687e6e27df7
 // * author:	Tatiana Gladkaya (https://sketchfab.com/tatiana_gladkaya)
 
+// Pencil and paper credits:
+// * title:	Pencil & Paper
+// * source:	https://sketchfab.com/3d-models/pencil-paper-19518f51430445b19eca65f346941e01
+// * author:	MOJackal (https://sketchfab.com/MOJackal)
+
 import Project from './Project.jsx'
 import { motion } from 'framer-motion'
 
@@ -138,6 +143,45 @@ export default function Portfolio(props) {
             <div className="h-[10vh]" />
             <Project
                 description={{
+                    title: 'SumIt (Reddit clone)',
+                    style: 'sumit',
+                    link: 'https://sumit-michael.vercel.app/',
+                    linkText: 'Live Website',
+                    tech: [
+                        {
+                            name: 'React',
+                            logo: './images/logos/react.png'
+                        },
+                        {
+                            name: 'TailwindCSS',
+                            logo: './images/logos/tailwind.webp'
+                        },
+                        {
+                            name: 'Next.js',
+                            logo: './images/logos/nextjs.webp'
+                        }
+                    ],
+                    description: `
+                                    SumIt is a topic discussion site for summarizing and discussing 
+                                    different topics, based on a Reddit clone tutorial by Josh Tried Coding. 
+                                    Next.js was used for for API calls and routing, as well as authentication with 
+                                    NextAuth. React, Tailwind, and a variety of ui libraries (i.e shadcn and Radix UI) 
+                                    were used for the UI, and Prisma was used with MySQL for the database.
+                                `,
+                    date: 'Summer 2023'
+                }}
+                position={[0.2, 0, 0]}
+                shadowY={1}
+                scale={[0.18, 0.18, 0.18]}
+                rotation={[0.7, -0.3, 0]}
+                model={{
+                    source: './models/pencilAndPaper.glb',
+                    rotation: [-0.4, 0, 0]
+                }}
+            />
+            <div className="h-[12vh]" />
+            <Project
+                description={{
                     title: 'Showtime (live movie site)',
                     style: 'showtime',
                     link: 'https://michaelcsi.github.io/Showtime/',
@@ -146,7 +190,6 @@ export default function Portfolio(props) {
                         {
                             name: 'React',
                             logo: './images/logos/react.png'
-                                
                         },
                         {
                             name: 'TailwindCSS',
