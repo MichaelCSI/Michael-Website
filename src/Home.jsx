@@ -90,7 +90,7 @@ export default function Home() {
                     <p className="mb-1 ml-1 mt-20 text-4xl">Hey,</p>
                     <h1 className="text-6xl md:text-8xl">I'm Michael</h1>
                     <p className="mb-10 ml-1 mt-8 text-3xl md:mb-0">
-                        Welcome to my portfolio
+                        Welcome to my 2023 portfolio
                     </p>
                 </div>
                 {!isMobileDevice() ? (
